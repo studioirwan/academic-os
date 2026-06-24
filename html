@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Academic OS - Premium Unified Workspace</title>
+    
+    <!-- Tailwind CSS with Official Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Google Fonts: Hanken Grotesk (Modern Sans) & Source Serif 4 (Elegant Editorial) -->
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet"/>
+    
+    <!-- Google Material Symbols for Minimal Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- GSAP for Smooth 60fps Page Transitions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Chart.js for Premium Interactive Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            transition: transform 0.2s ease;
+        }
+        
+        /* Modern Glassmorphism & Soft Ambient Lighting Effects */
+        .glass-card {
+            background: rgba(252, 249, 248, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(236, 236, 236, 0.8);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 30, 30, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Ambient Glowing Accents */
+        .glow-accent-primary {
+            box-shadow: 0 0 30px -5px rgba(93, 95, 95, 0.15);
+        }
+
+        /* Custom Ultra-minimal Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        /* Clean System Fonts Selection */
+        body {
+            font-family: 'Source Serif 4', serif;
+            background-color: #fcf9f8;
+            color: #1b1c1c;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+        
+        body.dark {
+            background-color: #121212;
+            color: #f3f0f0;
+        }
+
+        .heading-font {
+            font-family: 'Hanken Grotesk', sans-serif;
+        }
+
+        /* Microinteractions & Transitions */
+        .interactive-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .interactive-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Page Transitions Container styling */
+        .page-view {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        .page-view.active {
+            display: block;
+        }
+
+        /* Circle timer smooth rotation */
+        .timer-progress {
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        /* Custom Glassmorphic Toast */
+        #toast-notification {
+            transform: translateY(150%) translateX(-50%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #toast-notification.show {
+            transform: translateY(0) translateX(-50%);
+        }
+
+        /* Premium Floating Navigation Transition Indicator */
+        .nav-indicator {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    </style>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary": "#5a614f",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "primary": "#5d5f5f",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#646655",
+                        "background": "#fcf9f8",
+                        "tertiary-fixed": "#dee5cf",
+                        "on-surface": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#e8efd8",
+                        "inverse-surface": "#303030",
+                        "surface": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#464839",
+                        "on-surface-variant": "#444748",
+                        "surface-variant": "#e4e2e1",
+                        "on-secondary": "#ffffff",
+                        "outline": "#747878",
+                        "on-primary-fixed-variant": "#454747",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c2c9b4",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "on-primary-container": "#696a6b",
+                        "surface-tint": "#5d5f5f",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed": "#1a1c1c",
+                        "secondary-fixed-dim": "#c7c8b4",
+                        "primary-fixed": "#e2e2e2",
+                        "primary-container": "#ececec",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#424939",
+                        "surface-container": "#f0eded",
+                        "inverse-on-surface": "#f3f0f0",
+                        "secondary-fixed": "#e4e4cf",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-bright": "#fcf9f8",
+                        "on-secondary-fixed": "#1b1d10",
+                        "outline-variant": "#c4c7c8",
+                        "inverse-primary": "#c6c6c6",
+                        "on-tertiary-fixed": "#171d10",
+                        "on-background": "#1b1c1c",
+                        "secondary-container": "#e4e4cf",
+                        "on-tertiary-container": "#666d5b",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e2e1",
+                        "secondary": "#5e604f"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem",
+                        "3xl": "1.5rem"
+                    },
+                    spacing: {
+                        "container-max": "1440px",
+                        "section-gap": "160px",
+                        "margin-mobile": "24px",
+                        "gutter": "32px",
+                        "base": "8px",
+                        "margin-desktop": "64px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-primary-container dark:selection:bg-neutral-800">
+
+    <!-- Global Progress Scrollbar (Apple & SaaS Style) -->
+    <div class="fixed top-0 left-0 w-full h-[3px] bg-neutral-200 dark:bg-neutral-800 z-50">
+        <div id="scroll-progress" class="h-full bg-primary dark:bg-neutral-400 w-0 transition-all duration-75"></div>
+    </div>
+
+    <!-- Collapsible Premium Side Navigation -->
+    <aside id="sidebar" class="fixed left-0 top-0 h-screen w-64 border-r border-outline-variant dark:border-neutral-800 bg-surface dark:bg-neutral-950 flex flex-col py-8 px-6 z-50 transition-all duration-300">
+        <div class="mb-10 flex items-center justify-between">
+            <div>
+                <h1 class="heading-font text-2xl font-extrabold tracking-tighter text-on-surface dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary dark:text-neutral-400">layers</span>
+                    Academic OS
+                </h1>
+                <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 opacity-70 tracking-wide font-semibold flex items-center gap-1.5">
+                    Fall Semester 2024
+                    <!-- Status Database Connection Badge -->
+                    <span id="db-status-badge" class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500" title="Memeriksa status database..."></span>
+                </p>
+            </div>
+            <!-- Minimal Collapse Trigger (Desktop & Tablet) -->
+            <button onclick="toggleSidebar()" class="p-1 rounded hover:bg-surface-container-low dark:hover:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 hidden md:block">
+                <span id="collapse-icon" class="material-symbols-outlined text-xl">first_page</span>
+            </button>
+        </div>
+
+        <!-- Navigation Links with Custom Page State Router -->
+        <nav class="flex-grow space-y-2">
+            <button onclick="switchPage('dashboard')" data-nav="dashboard" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
+                <span class="material-symbols-outlined group-hover:scale-110" data-icon="dashboard">dashboard</span>
+                <span class="nav-text">Dashboard</span>
+                <div class="nav-indicator ml-auto w-1.5 h-1.5 rounded-full bg-primary dark:bg-neutral-400 opacity-0"></div>
+            </button>
+            <button onclick="switchPage('schedule')" data-nav="schedule" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
+                <span class="material-symbols-outlined group-hover:scale-110" data-icon="calendar_month">calendar_month</span>
+                <span class="nav-text">Jadwal</span>
+                <div class="nav-indicator ml-auto w-1.5 h-1.5 rounded-full bg-primary dark:bg-neutral-400 opacity-0"></div>
+            </button>
+            <button onclick="switchPage('assignments')" data-nav="assignments" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
+                <span class="material-symbols-outlined group-hover:scale-110" data-icon="assignment">assignment</span>
+                <span class="nav-text">Tugas</span>
+                <div class="nav-indicator ml-auto w-1.5 h-1.5 rounded-full bg-primary dark:bg-neutral-400 opacity-0"></div>
+            </button>
+            <button onclick="switchPage('notebook')" data-nav="notebook" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
+                <span class="material-symbols-outlined group-hover:scale-110" data-icon="menu_book">menu_book</span>
+                <span class="nav-text">Catatan</span>
+                <div class="nav-indicator ml-auto w-1.5 h-1.5 rounded-full bg-primary dark:bg-neutral-400 opacity-0"></div>
+            </button>
+            <button onclick="switchPage('analytics')" data-nav="analytics" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
+                <span class="material-symbols-outlined group-hover:scale-110" data-icon="monitoring">monitoring</span>
+                <span class="nav-text">Analisis</span>
+                <div class="nav-indicator ml-auto w-1.5 h-1.5 rounded-full bg-primary dark:bg-neutral-400 opacity-0"></div>
+            </button>
+        </nav>
+
+        <!-- Quick Create Note Trigger -->
+        <button onclick="openQuickNoteModal()" class="mt-8 mb-10 py-3 px-4 bg-primary dark:bg-neutral-800 text-on-primary dark:text-neutral-200 rounded-xl heading-font text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all interactive-btn shadow-sm">
+            <span class="material-symbols-outlined text-sm" data-icon="add">edit_note</span>
+            <span class="nav-text">Catatan Cepat</span>
+        </button>
+
+        <!-- Sidebar Footer -->
+        <div class="space-y-3 border-t border-outline-variant dark:border-neutral-800 pt-6">
+            <button onclick="showToast('Pengaturan dibuka!')" class="w-full flex items-center gap-3 text-on-surface-variant dark:text-neutral-400 opacity-70 hover:opacity-100 transition-opacity heading-font text-sm font-semibold">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="nav-text">Settings</span>
+            </button>
+            <button onclick="showToast('Menghubungi support developer...')" class="w-full flex items-center gap-3 text-on-surface-variant dark:text-neutral-400 opacity-70 hover:opacity-100 transition-opacity heading-font text-sm font-semibold">
+                <span class="material-symbols-outlined">help</span>
+                <span class="nav-text">Support</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Unified Main Canvas Container -->
+    <main id="main-content" class="ml-64 min-h-screen transition-all duration-300">
+        
+        <!-- Premium Dual-Mode Top App Bar -->
+        <header class="sticky top-0 z-40 w-full px-6 md:px-12 py-4 flex justify-between items-center bg-surface/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-outline-variant dark:border-neutral-800">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleMobileMenu()" class="p-2 rounded-xl hover:bg-surface-container-low dark:hover:bg-neutral-800 md:hidden text-on-surface dark:text-white">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <h2 id="app-bar-title" class="heading-font text-xl md:text-2xl font-bold text-on-surface dark:text-white transition-all">Academic Workspace</h2>
+            </div>
+            
+            <div class="flex items-center gap-4 md:gap-8">
+                <!-- Advanced Global Live Filtering -->
+                <div class="relative hidden sm:block">
+                    <input id="global-search" oninput="handleGlobalSearch(this.value)" class="w-48 lg:w-64 pl-10 pr-4 py-2 rounded-full border-none bg-surface-container-low dark:bg-neutral-800 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary dark:focus:ring-neutral-500 heading-font text-xs" placeholder="Cari di workspace..." type="text"/>
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-neutral-400 scale-90" data-icon="search">search</span>
+                </div>
+
+                <div class="flex items-center gap-2 md:gap-4">
+                    <!-- Global Sheet Sync Refresh Button -->
+                    <button id="sync-refresh-btn" onclick="fetchSpreadsheetData()" class="p-2 hover:bg-surface-container-high dark:hover:bg-neutral-800 rounded-full transition-all text-on-surface-variant dark:text-neutral-400 relative" title="Sinkronisasi manual database">
+                        <span class="material-symbols-outlined">sync</span>
+                    </button>
+                    <!-- Notifications -->
+                    <button onclick="showToast('Sistem notifikasi dalam keadaan siaga.', 'notifications')" class="p-2 hover:bg-surface-container-high dark:hover:bg-neutral-800 rounded-full transition-all text-on-surface-variant dark:text-neutral-400 relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full animate-pulse"></span>
+                    </button>
+                    <!-- Dark/Light Mode Switcher -->
+                    <button onclick="toggleTheme()" class="p-2 hover:bg-surface-container-high dark:hover:bg-neutral-800 rounded-full transition-all text-on-surface-variant dark:text-neutral-400">
+                        <span id="theme-icon" class="material-symbols-outlined">bedtime</span>
+                    </button>
+                    
+                    <!-- Vertical Divider -->
+                    <div class="h-6 w-[1px] bg-neutral-300 dark:bg-neutral-800"></div>
+
+                    <!-- User Account profile -->
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-tertiary-container overflow-hidden border border-outline-variant dark:border-neutral-800 shadow-sm">
+                            <img class="w-full h-full object-cover" alt="Student Profile Picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBcFSAHjjq6fi5i3iberZu5aQPP2aP_ZVRiLWeGEZE3Ai7bmzwufMm1zfv38aHJThVSK9gDlOYlISeqCUGR1TeQyV9gvkqI4T9XCNKW8hJGwSu2--e0Lv6PAZ-Nb28FZUIY3mfa1zp822alOSqNQQ-GxSzMqFTR8W00xFXDl5ihmoHaMdyJYVzJ0UX810cJDhTGSSWeoxNcYueo3JSDqo-GEXDRlWNSj_ZVupUHUyP-FtTeQz8PhNBN9h4Bpf_qvLDVjlrO9sKQLpA"/>
+                        </div>
+                        <span class="heading-font font-bold text-sm hidden lg:block text-on-surface dark:text-neutral-200">Julian S.</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- PAGE 1: DASHBOARD VIEW -->
+        <section id="view-dashboard" class="page-view px-6 md:px-12 py-12 space-y-12">
+            <!-- Dynamic Greetings & Metrics -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-outline-variant dark:border-neutral-800 pb-8">
+                <div>
+                    <h3 id="dashboard-greeting" class="heading-font text-4xl md:text-5xl font-light text-on-surface dark:text-white mb-2">Welcome back, Julian</h3>
+                    <p class="text-base md:text-lg text-on-surface-variant dark:text-neutral-400 italic">"The beautiful thing about learning is that no one can take it away from you."</p>
+                </div>
+                <div class="text-left md:text-right space-y-1">
+                    <p id="live-date" class="heading-font text-2xl text-primary dark:text-neutral-400 font-bold">October 24, 2024</p>
+                    <p id="live-time" class="heading-font text-xs tracking-widest text-on-surface-variant dark:text-neutral-500 font-semibold uppercase">10:45 AM • FALL SEMESTER</p>
+                </div>
+            </div>
+
+            <!-- Bento Layout Matrix -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Today's Focus Widget -->
+                <div class="lg:col-span-8 p-8 md:p-10 rounded-3xl glass-card flex flex-col justify-between min-h-[400px]">
+                    <div>
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <h4 class="heading-font text-2xl font-semibold text-on-surface dark:text-neutral-100">Fokus Hari Ini</h4>
+                                <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 opacity-80 mt-1">Jadwal kegiatan kuliah aktif hari ini</p>
+                            </div>
+                            <span id="dashboard-events-count" class="py-1 px-3 bg-tertiary-container dark:bg-neutral-800 text-on-tertiary-container dark:text-neutral-200 rounded-full text-xs font-bold heading-font">MOCK DATA</span>
+                        </div>
+                        
+                        <div id="dashboard-today-classes" class="space-y-4">
+                            <!-- Loop Data Kelas Hari Ini Dibuat Dinamis Melalui API -->
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-outline-variant dark:border-neutral-800 flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary-container dark:bg-neutral-800 rounded-full flex items-center justify-center animate-bounce">
+                            <span class="material-symbols-outlined text-primary dark:text-neutral-400" data-icon="tips_and_updates">tips_and_updates</span>
+                        </div>
+                        <p class="text-sm text-on-surface-variant dark:text-neutral-300">Target Selanjutnya: <span class="font-bold text-on-surface dark:text-white underline">Menganalisis Steady State</span> di menu Notebook.</p>
+                    </div>
+                </div>
+
+                <!-- Modern Weather Widget (M3 Style) -->
+                <div class="lg:col-span-4 p-8 rounded-3xl bg-secondary-container dark:bg-neutral-900 text-on-secondary-fixed flex flex-col justify-between min-h-[400px] border border-outline-variant dark:border-neutral-800 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/20 dark:bg-neutral-800/40 rounded-full blur-2xl"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-center mb-10">
+                            <span class="heading-font text-xs font-bold tracking-[0.2em] dark:text-neutral-300">CAMBRIDGE, MA</span>
+                            <span class="material-symbols-outlined dark:text-neutral-300" data-icon="cloud">cloud</span>
+                        </div>
+                        <div class="space-y-1">
+                            <p class="text-6xl font-extrabold heading-font dark:text-white">54°F</p>
+                            <p class="heading-font text-lg font-semibold dark:text-neutral-300 opacity-90">Berawan Sebagian</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative z-10 flex gap-4 overflow-x-auto pb-2">
+                        <div class="min-w-[60px] text-center space-y-1.5 p-2 bg-white/25 dark:bg-neutral-800/50 rounded-xl">
+                            <p class="heading-font text-[10px] font-bold dark:text-neutral-300">12 PM</p>
+                            <span class="material-symbols-outlined text-lg dark:text-neutral-200" data-icon="sunny">sunny</span>
+                            <p class="heading-font text-xs font-semibold dark:text-neutral-200">56°</p>
+                        </div>
+                        <div class="min-w-[60px] text-center space-y-1.5 p-2 bg-white/25 dark:bg-neutral-800/50 rounded-xl">
+                            <p class="heading-font text-[10px] font-bold dark:text-neutral-300">1 PM</p>
+                            <span class="material-symbols-outlined text-lg dark:text-neutral-200" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+                            <p class="heading-font text-xs font-semibold dark:text-neutral-200">58°</p>
+                        </div>
+                        <div class="min-w-[60px] text-center space-y-1.5 p-2 bg-white/25 dark:bg-neutral-800/50 rounded-xl">
+                            <p class="heading-font text-[10px] font-bold dark:text-neutral-300">2 PM</p>
+                            <span class="material-symbols-outlined text-lg dark:text-neutral-200" data-icon="cloud">cloud</span>
+                            <p class="heading-font text-xs font-semibold dark:text-neutral-200">55°</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Column: Analytics Insight -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Productivity Study Hours Log -->
+                <div class="lg:col-span-5 p-8 rounded-3xl bg-white dark:bg-neutral-950 border border-outline-variant dark:border-neutral-800 space-y-8">
+                    <div class="flex justify-between items-center">
+                        <h4 class="heading-font text-xl font-bold text-on-surface dark:text-neutral-100">Jam Belajar Harian</h4>
+                        <button onclick="switchPage('analytics')" class="text-primary dark:text-neutral-400 hover:underline heading-font text-xs font-bold tracking-wider">Laporan Lengkap</button>
+                    </div>
+                    <div class="h-44 relative">
+                        <canvas id="dashboardStudyChart"></canvas>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-surface-container-low dark:bg-neutral-900 rounded-2xl border border-neutral-100 dark:border-neutral-800">
+                            <p class="heading-font text-[10px] text-outline dark:text-neutral-400 font-extrabold tracking-wider uppercase">TOTAL MINGGUAN</p>
+                            <p class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1">32.4j</p>
+                        </div>
+                        <div class="p-4 bg-surface-container-low dark:bg-neutral-900 rounded-2xl border border-neutral-100 dark:border-neutral-800">
+                            <p class="heading-font text-[10px] text-outline dark:text-neutral-400 font-extrabold tracking-wider uppercase">STREAK AKTIF</p>
+                            <p class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1 flex items-center gap-1">
+                                12 Hari
+                                <span class="material-symbols-outlined text-amber-500 fill-1" style="font-variation-settings: 'FILL' 1">local_fire_department</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Progress Tracking -->
+                <div class="lg:col-span-7 p-8 rounded-3xl bg-white dark:bg-neutral-950 border border-outline-variant dark:border-neutral-800 space-y-6">
+                    <h4 class="heading-font text-xl font-bold text-on-surface dark:text-neutral-100">Progres Capaian Akademik</h4>
+                    <div class="space-y-6">
+                        <!-- Progress 1 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="heading-font font-semibold text-on-surface dark:text-neutral-200">Thesis Research & Outline</span>
+                                <span class="heading-font font-bold text-primary dark:text-neutral-400">65%</span>
+                            </div>
+                            <div class="w-full h-3 bg-surface-container dark:bg-neutral-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary dark:bg-neutral-400 w-[65%] rounded-full transition-all duration-1000 glow-accent-primary"></div>
+                            </div>
+                        </div>
+                        <!-- Progress 2 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-sm">
+                                <span class="heading-font font-semibold text-on-surface dark:text-neutral-200">Applied Econometrics Lab</span>
+                                <span class="heading-font font-bold text-primary dark:text-neutral-400">82%</span>
+                            </div>
+                            <div class="w-full h-3 bg-surface-container dark:bg-neutral-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-tertiary dark:bg-neutral-500 w-[82%] rounded-full transition-all duration-1000"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-outline-variant dark:border-neutral-800">
+                        <div class="text-center p-4 rounded-2xl bg-tertiary-container dark:bg-neutral-900">
+                            <span class="material-symbols-outlined text-tertiary dark:text-neutral-300" style="font-variation-settings: 'FILL' 1" data-icon="auto_stories">auto_stories</span>
+                            <p class="heading-font text-[10px] font-bold text-on-surface dark:text-neutral-300 mt-2">12 BUKU DIBACA</p>
+                        </div>
+                        <div class="text-center p-4 rounded-2xl bg-primary-container dark:bg-neutral-900">
+                            <span class="material-symbols-outlined text-primary dark:text-neutral-300" style="font-variation-settings: 'FILL' 1" data-icon="task_alt">task_alt</span>
+                            <p id="dashboard-tasks-completed-text" class="heading-font text-[10px] font-bold text-on-surface dark:text-neutral-300 mt-2">48 TUGAS SELESAI</p>
+                        </div>
+                        <div class="text-center p-4 rounded-2xl bg-surface-container dark:bg-neutral-900">
+                            <span class="material-symbols-outlined text-on-surface-variant dark:text-neutral-300" style="font-variation-settings: 'FILL' 1" data-icon="grade">grade</span>
+                            <p class="heading-font text-[10px] font-bold text-on-surface dark:text-neutral-300 mt-2">GPA 3.92</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: COURSE SCHEDULE VIEW -->
+        <section id="view-schedule" class="page-view px-6 md:px-12 py-12 space-y-12">
+            <!-- Header Schedule & Actions -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
+                <div>
+                    <h3 class="heading-font text-4xl font-extrabold tracking-tight dark:text-white">Jadwal Kuliah</h3>
+                    <p class="text-lg text-on-surface-variant dark:text-neutral-400 opacity-80">Sinkronisasi langsung dari Sheet 'Schedule'</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex bg-surface-container dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 rounded-full p-1 shadow-sm">
+                        <button onclick="toggleScheduleView('week')" id="weekViewBtn" class="px-5 py-1.5 rounded-full heading-font text-xs font-semibold bg-on-surface dark:bg-neutral-700 text-surface dark:text-white transition-all">Mingguan</button>
+                        <button onclick="toggleScheduleView('month')" id="monthViewBtn" class="px-5 py-1.5 rounded-full heading-font text-xs font-semibold text-on-surface-variant dark:text-neutral-300 hover:bg-surface-container-high dark:hover:bg-neutral-800 transition-all">Bulanan</button>
+                    </div>
+                    <button onclick="openAddCourseModal()" class="flex items-center gap-2 bg-primary dark:bg-neutral-800 text-white rounded-full px-5 py-2.5 heading-font text-xs font-bold hover:scale-[1.02] interactive-btn">
+                        <span class="material-symbols-outlined text-sm">add</span>
+                        Tambah Kelas
+                    </button>
+                </div>
+            </div>
+
+            <!-- PREMIUM MINIMALIST CALENDAR GRID (No thick side borders, clean dot accents) -->
+            <div id="schedule-weekly-grid" class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                <!-- Data kolom per-hari diisi secara dinamis melalui JavaScript -->
+            </div>
+
+            <!-- Beautiful Monthly Calendar Shell Container -->
+            <div id="schedule-monthly-grid" class="hidden glass-card p-8 rounded-3xl space-y-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="heading-font font-bold text-xl dark:text-white">Jadwal Grid Bulanan</h4>
+                    <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 uppercase tracking-widest font-bold">Cambridge Term Schedule</p>
+                </div>
+                <div class="grid grid-cols-7 gap-2 text-center text-xs heading-font font-bold text-outline dark:text-neutral-400 uppercase">
+                    <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+                </div>
+                <div class="grid grid-cols-7 gap-2 text-center heading-font text-sm">
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg opacity-40">29</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg opacity-40">30</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">1</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">2</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">3</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">4</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">5</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">6</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">7</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">8</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">9</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">10</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">11</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">12</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">13</div>
+                    <div class="p-4 bg-primary text-white font-bold rounded-lg cursor-pointer">14</div>
+                    <div class="p-4 bg-primary text-white font-bold rounded-lg cursor-pointer">15</div>
+                    <div class="p-4 bg-tertiary text-white font-bold rounded-lg cursor-pointer">16</div>
+                    <div class="p-4 bg-primary text-white font-bold rounded-lg cursor-pointer">17</div>
+                    <div class="p-4 bg-primary text-white font-bold rounded-lg cursor-pointer">18</div>
+                    <div class="p-4 bg-surface-container-low dark:bg-neutral-800 rounded-lg">19</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: LECTURE NOTES / NOTEBOOK -->
+        <section id="view-notebook" class="page-view px-6 md:px-12 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Course select side list -->
+                <div class="lg:col-span-3 space-y-6">
+                    <h3 class="heading-font text-xs font-bold uppercase tracking-wider text-outline dark:text-neutral-400">Daftar Catatan Kuliah</h3>
+                    <div id="notebook-list" class="space-y-2">
+                        <!-- Dimuat secara dinamis -->
+                    </div>
+
+                    <!-- Functional Pomodoro Circle Widget -->
+                    <div class="p-6 rounded-3xl bg-secondary-container dark:bg-neutral-900 text-on-secondary-fixed space-y-4 shadow-sm border border-neutral-200 dark:border-neutral-800">
+                        <div class="flex justify-between items-center">
+                            <span class="heading-font text-xs font-bold tracking-wider dark:text-neutral-300">POMODORO TIMER</span>
+                            <span class="material-symbols-outlined text-sm text-on-secondary-container dark:text-neutral-300">hourglass_empty</span>
+                        </div>
+                        <div class="flex items-center justify-around">
+                            <div class="relative w-16 h-16">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle class="text-neutral-200 dark:text-neutral-700" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+                                    <circle id="pomo-progress" class="text-primary dark:text-neutral-300 timer-progress" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="0" stroke-width="4"></circle>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span id="pomo-clock-icon" class="material-symbols-outlined text-xl text-primary dark:text-neutral-300">timer</span>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <p id="pomo-time" class="heading-font text-2xl font-extrabold tabular-nums dark:text-white">25:00</p>
+                                <p class="heading-font text-[10px] font-bold tracking-widest text-on-surface-variant dark:text-neutral-400">INTERVAL FOKUS</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 justify-center pt-2">
+                            <button id="pomo-trigger-btn" onclick="togglePomodoro()" class="flex-1 py-2 px-3 bg-primary dark:bg-neutral-800 text-white rounded-xl heading-font text-xs font-bold flex items-center justify-center gap-1.5 interactive-btn">
+                                <span id="pomo-play-icon" class="material-symbols-outlined text-sm">play_arrow</span>
+                                <span id="pomo-play-text">Start Pomo</span>
+                            </button>
+                            <button onclick="resetPomodoro()" class="p-2 border border-outline-variant dark:border-neutral-700 hover:bg-white dark:hover:bg-neutral-800 text-on-surface dark:text-neutral-300 rounded-xl interactive-btn">
+                                <span class="material-symbols-outlined text-sm">restart_alt</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rich Note Text Editor Canvas -->
+                <div class="lg:col-span-9 bg-white dark:bg-neutral-950 p-8 md:p-12 rounded-3xl border border-outline-variant dark:border-neutral-800 shadow-sm space-y-8 relative">
+                    <div class="absolute top-8 right-8 flex items-center gap-3">
+                        <button onclick="saveCurrentNoteToServer()" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-xl text-xs font-bold heading-font interactive-btn shadow-sm" title="Simpan ke Spreadsheet">
+                            <span class="material-symbols-outlined text-sm">save</span>
+                            Simpan ke Sheet
+                        </button>
+                    </div>
+                    
+                    <article class="space-y-6">
+                        <header class="border-b border-outline-variant dark:border-neutral-800 pb-6">
+                            <div class="flex gap-2 mb-3">
+                                <span id="editor-tag-week" class="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-300 heading-font text-[9px] font-bold uppercase rounded-lg">WEEK 6</span>
+                                <span id="editor-tag-course" class="px-2 py-0.5 bg-primary/10 text-primary dark:text-neutral-300 heading-font text-[9px] font-bold uppercase rounded-lg">ECON 302</span>
+                            </div>
+                            <h1 id="editor-title" class="heading-font text-3xl md:text-4xl font-extrabold text-on-surface dark:text-white" contenteditable="true">Modern Economic Equilibrium Models</h1>
+                            <p id="editor-subtitle" class="text-sm text-on-surface-variant dark:text-neutral-400 mt-2 italic" contenteditable="true">Reviewing the Solow-Swan model and steady state capital dynamics.</p>
+                        </header>
+
+                        <!-- Content Editable Note Area -->
+                        <div id="editor-content" class="space-y-4 text-base md:text-lg leading-relaxed text-on-surface dark:text-neutral-200 min-h-[300px] outline-none" contenteditable="true">
+                            Mulai mengetik catatan Anda di sini...
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: ASSIGNMENTS & DAILY WORKLIST -->
+        <section id="view-assignments" class="page-view px-6 md:px-12 py-12 space-y-12">
+            <!-- Visual Hero Highlight Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div class="lg:col-span-7 flex flex-col justify-center space-y-4">
+                    <h3 class="heading-font text-4xl md:text-5xl font-extrabold tracking-tight dark:text-white leading-none">Daftar Tugas & Kegiatan</h3>
+                    <p class="text-base md:text-lg text-on-surface-variant dark:text-neutral-400 max-w-xl">Mengatur target akademis harian dan mingguan secara terstruktur. Terkoneksi secara langsung dengan Google Sheets.</p>
+                </div>
+                <!-- Premium Countdown Card -->
+                <div class="lg:col-span-5 p-8 rounded-3xl bg-neutral-900 dark:bg-neutral-950 text-white relative overflow-hidden flex flex-col justify-between shadow-xl">
+                    <div class="absolute -right-6 -top-6 opacity-5">
+                        <span class="material-symbols-outlined text-[140px]" style="font-variation-settings: 'FILL' 1">hourglass_bottom</span>
+                    </div>
+                    <div>
+                        <span class="heading-font text-[10px] font-bold tracking-[0.25em] text-neutral-400 block mb-2 uppercase">Ujian Utama Berikutnya</span>
+                        <h4 class="heading-font text-2xl font-bold">Advanced Microeconomics Final</h4>
+                    </div>
+                    
+                    <div class="flex gap-4 mt-8" id="exam-countdown">
+                        <div class="text-center">
+                            <span id="pomo-days" class="block text-3xl font-extrabold heading-font">08</span>
+                            <span class="text-[9px] uppercase tracking-widest text-neutral-400 font-bold">Hari</span>
+                        </div>
+                        <div class="text-xl font-light opacity-30 mt-1">:</div>
+                        <div class="text-center">
+                            <span id="pomo-hours" class="block text-3xl font-extrabold heading-font">14</span>
+                            <span class="text-[9px] uppercase tracking-widest text-neutral-400 font-bold">Jam</span>
+                        </div>
+                        <div class="text-xl font-light opacity-30 mt-1">:</div>
+                        <div class="text-center">
+                            <span id="pomo-mins" class="block text-3xl font-extrabold heading-font">32</span>
+                            <span class="text-[9px] uppercase tracking-widest text-neutral-400 font-bold">Menit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Checklist and Assignment Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Active Tasks Area -->
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="heading-font text-xl font-bold dark:text-white">Tugas Aktif</h4>
+                        <button onclick="openAddAssignmentModal()" class="flex items-center gap-2 text-xs font-bold heading-font text-primary dark:text-neutral-400 hover:underline">
+                            <span class="material-symbols-outlined text-sm">add</span> Tambah Tugas
+                        </button>
+                    </div>
+
+                    <div id="assignments-list-container" class="space-y-4">
+                        <!-- Data diisi secara dinamis dari API Sheets -->
+                    </div>
+                </div>
+
+                <!-- Right Side Interactive Checklist -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="p-6 md:p-8 rounded-3xl bg-surface-container dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 space-y-6">
+                        <h4 class="heading-font text-lg font-bold dark:text-white">Fokus Agenda Hari Ini</h4>
+                        
+                        <div id="daily-checklist-container" class="space-y-4">
+                            <!-- Tugas checklist dimuat secara dinamis -->
+                        </div>
+
+                        <!-- Progress indicator widget -->
+                        <div class="pt-6 border-t border-outline-variant dark:border-neutral-800 space-y-2">
+                            <div class="flex justify-between text-xs heading-font font-bold">
+                                <span class="dark:text-neutral-300">Status Agenda Harian</span>
+                                <span id="checklist-tracker-text" class="text-primary dark:text-neutral-400">0/0 Selesai</span>
+                            </div>
+                            <div class="w-full h-2 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
+                                <div id="checklist-tracker-bar" class="h-full bg-primary dark:bg-neutral-400 w-0 transition-all duration-300"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: ANALYTICS / STATISTICS & INSIGHTS -->
+        <section id="view-analytics" class="page-view px-6 md:px-12 py-12 space-y-12">
+            <!-- Grid Stats Hero Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Stat Card 1 -->
+                <div class="bg-surface-container-low dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl flex flex-col justify-between">
+                    <div class="space-y-1">
+                        <span class="heading-font text-xs font-extrabold text-outline dark:text-neutral-400 uppercase tracking-widest">Total Jurnal</span>
+                        <h2 class="heading-font text-4xl font-extrabold dark:text-white">184 Entry Logs</h2>
+                    </div>
+                    <div class="flex items-center gap-1 mt-6 text-green-600 dark:text-green-400 heading-font text-xs font-bold">
+                        <span class="material-symbols-outlined text-sm">trending_up</span>
+                        <span>+12% dari bulan lalu</span>
+                    </div>
+                </div>
+                <!-- Stat Card 2 -->
+                <div class="bg-secondary-container dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl flex flex-col justify-between">
+                    <div class="space-y-1">
+                        <span class="heading-font text-xs font-extrabold text-outline dark:text-neutral-300 uppercase tracking-widest">Hari Paling Produktif</span>
+                        <h2 class="heading-font text-4xl font-extrabold dark:text-white">Selasa</h2>
+                    </div>
+                    <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 italic">Rata-rata 840 kata ditulis harian</p>
+                </div>
+                <!-- Stat Card 3 -->
+                <div class="bg-surface-container-low dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl space-y-4">
+                    <span class="heading-font text-xs font-extrabold text-outline dark:text-neutral-400 uppercase tracking-widest block">Tema Utama</span>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-tertiary-container dark:bg-neutral-800 text-on-tertiary-container dark:text-neutral-200 rounded-full heading-font text-[10px] font-bold">MINDFULNESS</span>
+                        <span class="px-3 py-1 bg-surface-container-highest dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-200 rounded-full heading-font text-[10px] font-bold">KARIR</span>
+                        <span class="px-3 py-1 bg-tertiary-container dark:bg-neutral-800 text-on-tertiary-container dark:text-neutral-200 rounded-full heading-font text-[10px] font-bold">GRATITUDE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Double Column Analytical Visualization -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                <!-- Graph 1: Studio Consistency Log -->
+                <div class="lg:col-span-3 bg-white dark:bg-neutral-950 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h3 class="heading-font text-lg font-bold dark:text-white">Tren Konsistensi Belajar</h3>
+                        <div class="flex gap-2">
+                            <button onclick="updateReflectiveGraph('7D')" class="text-xs font-bold heading-font border-b-2 border-on-surface dark:border-white">7 Hari</button>
+                            <button onclick="updateReflectiveGraph('1M')" class="text-xs font-bold heading-font text-outline dark:text-neutral-400 hover:text-primary transition-colors">1 Bulan</button>
+                        </div>
+                    </div>
+                    <div class="h-64 relative">
+                        <canvas id="reflectiveStudyChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Donut Graph 2: Mood Spectrum Donut -->
+                <div class="lg:col-span-2 bg-white dark:bg-neutral-950 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl space-y-6">
+                    <h3 class="heading-font text-lg font-bold dark:text-white text-center">Faktor Mood Harian</h3>
+                    <div class="h-56 relative flex items-center justify-center">
+                        <canvas id="moodSpectrumChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Activity Map Grid -->
+            <div class="p-8 rounded-3xl bg-surface-container-low dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <h3 class="heading-font text-lg font-bold dark:text-white">Peta Aktivitas Belajar (Annual Heatmap)</h3>
+                    <div class="flex items-center gap-2 text-[10px] heading-font font-bold text-outline dark:text-neutral-400 uppercase tracking-widest">
+                        <span>Sedikit</span>
+                        <div class="flex gap-1">
+                            <div class="w-3.5 h-3.5 bg-neutral-200 dark:bg-neutral-800 rounded"></div>
+                            <div class="w-3.5 h-3.5 bg-neutral-400 dark:bg-neutral-600 rounded"></div>
+                            <div class="w-3.5 h-3.5 bg-primary/45 dark:bg-neutral-400/45 rounded"></div>
+                            <div class="w-3.5 h-3.5 bg-primary dark:bg-neutral-300 rounded"></div>
+                        </div>
+                        <span>Banyak</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-12 sm:grid-cols-24 lg:grid-cols-52 gap-1.5 overflow-x-auto pb-4 no-scrollbar" id="activityMapGrid">
+                    <!-- JavaScript dinamik mengisi map -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Workspace Footer Spacer -->
+        <footer class="h-32 flex items-center justify-center border-t border-outline-variant dark:border-neutral-800 mt-12 px-6">
+            <p class="heading-font text-xs text-outline dark:text-neutral-500 font-bold uppercase tracking-widest">Academic OS v2.1 • Cloud Connected Edition</p>
+        </footer>
+    </main>
+
+    <!-- PREMIUM INTERACTIVE POPUPS & WIDGETS -->
+
+    <!-- Global Toast Alert Banner -->
+    <div id="toast-notification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-card px-6 py-3.5 rounded-2xl flex items-center gap-3 shadow-2xl transition-all duration-300">
+        <span class="material-symbols-outlined text-primary dark:text-neutral-400" id="toast-icon">info</span>
+        <span class="heading-font text-xs font-bold dark:text-neutral-200 uppercase tracking-wider" id="toast-msg">Default Action Success!</span>
+    </div>
+
+    <!-- Quick Note Modal Backdrop Overlay -->
+    <div id="quickNoteModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-all duration-300 flex items-center justify-center p-6">
+        <div class="glass-card w-full max-w-lg rounded-3xl p-8 space-y-6 shadow-2xl relative transform scale-95 transition-all duration-300">
+            <button onclick="closeQuickNoteModal()" class="absolute top-6 right-6 p-1.5 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-outline dark:text-neutral-400">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="heading-font text-2xl font-extrabold dark:text-white">Buat Catatan Cepat</h3>
+            
+            <div class="space-y-4">
+                <input id="quick-note-title" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl heading-font text-sm font-bold text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary focus:outline-none p-3.5" placeholder="Judul Catatan..."/>
+                <textarea id="quick-note-body" rows="5" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl heading-font text-sm text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary focus:outline-none p-3.5" placeholder="Tuliskan draf cepat atau persamaan di sini..."></textarea>
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="saveQuickNote()" class="flex-1 py-3 bg-primary dark:bg-neutral-800 text-white rounded-xl heading-font text-xs font-bold tracking-wider uppercase interactive-btn">Simpan ke Sheets</button>
+                <button onclick="closeQuickNoteModal()" class="flex-1 py-3 border border-outline-variant dark:border-neutral-700 text-on-surface dark:text-neutral-300 rounded-xl heading-font text-xs font-bold tracking-wider uppercase interactive-btn">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form: Tambah Kelas (Schedule) -->
+    <div id="addCourseModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-all duration-300 flex items-center justify-center p-6">
+        <div class="glass-card w-full max-w-lg rounded-3xl p-8 space-y-6 shadow-2xl relative transform scale-95 transition-all duration-300">
+            <button onclick="closeAddCourseModal()" class="absolute top-6 right-6 p-1.5 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-outline dark:text-neutral-400">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="heading-font text-2xl font-extrabold dark:text-white">Tambah Jadwal Kuliah</h3>
+            
+            <div class="space-y-4">
+                <input id="course-title" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm font-bold p-3" placeholder="Nama Mata Kuliah..."/>
+                <input id="course-instructor" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Dosen Pengampu..."/>
+                <div class="grid grid-cols-2 gap-4">
+                    <select id="course-day" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3">
+                        <option value="Monday">Senin</option>
+                        <option value="Tuesday">Selasa</option>
+                        <option value="Wednesday">Rabu</option>
+                        <option value="Thursday">Kamis</option>
+                        <option value="Friday">Jumat</option>
+                    </select>
+                    <input id="course-time" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Waktu (e.g. 09:00 - 10:30)"/>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <input id="course-location" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Ruangan/Lokasi"/>
+                    <select id="course-type" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3">
+                        <option value="Core Course">Core Course</option>
+                        <option value="Science">Science</option>
+                        <option value="Active Seminar">Active Seminar</option>
+                        <option value="Elective">Elective</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="submitNewCourse()" class="flex-1 py-3 bg-primary text-white rounded-xl text-xs font-bold tracking-wider uppercase interactive-btn">Simpan Kelas</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form: Tambah Tugas (Assignments) -->
+    <div id="addAssignmentModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-all duration-300 flex items-center justify-center p-6">
+        <div class="glass-card w-full max-w-lg rounded-3xl p-8 space-y-6 shadow-2xl relative transform scale-95 transition-all duration-300">
+            <button onclick="closeAddAssignmentModal()" class="absolute top-6 right-6 p-1.5 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 text-outline dark:text-neutral-400">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h3 class="heading-font text-2xl font-extrabold dark:text-white">Tambah Tugas Baru</h3>
+            
+            <div class="space-y-4">
+                <input id="task-title" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm font-bold p-3" placeholder="Nama Tugas..."/>
+                <input id="task-course" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Mata Kuliah & Kode..."/>
+                <div class="grid grid-cols-2 gap-4">
+                    <select id="task-priority" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3">
+                        <option value="High Priority">Prioritas Tinggi</option>
+                        <option value="Medium Priority">Prioritas Sedang</option>
+                        <option value="Low Priority">Prioritas Rendah</option>
+                    </select>
+                    <input id="task-duedate" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Tenggat (e.g. Due in 3 days)"/>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <input id="task-est" type="number" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Estimasi Jam Belajar"/>
+                    <input id="task-percent" type="number" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Progres Awal (e.g. 10)"/>
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="submitNewAssignment()" class="flex-1 py-3 bg-primary text-white rounded-xl text-xs font-bold tracking-wider uppercase interactive-btn">Simpan Tugas</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MAIN INTERACTIVE STATE ENGINE & ALGORITHMS -->
+    <script>
+        // =========================================================================
+        // CONFIGURATION: Ganti dengan URL Web App Google Apps Script Anda setelah di-deploy
+        // =========================================================================
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwAiaXQ9uXAwUEeiuaiOiahC9KL1-z2i0vqBRexwmZ0D1SQMBehR7NOrxi_VaUDaZirWQ/exec"; 
+
+        // Global State Repository
+        const appState = {
+            currentTheme: 'light',
+            currentPage: 'dashboard',
+            isSidebarCollapsed: false,
+            pomoRunning: false,
+            pomoTimeLeft: 25 * 60, 
+            pomoInterval: null,
+            totalFocusTasks: 2,
+            completedFocusTasks: 0,
+            activeNoteId: 'note_1',
+            // Local DB Cache
+            db: {
+                schedule: [],
+                assignments: [],
+                notes: [],
+                checklist: []
+            }
+        };
+
+        // Fallback Mock Data jika database sheets belum diset
+        const mockDatabase = {
+            schedule: [
+                { ID: "course_1", Day: "Monday", Title: "Systems Thinking", Instructor: "Prof. Elena Vance", Time: "09:00 - 10:30", Location: "Studio 2B", Type: "Core Course" },
+                { ID: "course_2", Day: "Tuesday", Title: "Cognitive Psychology", Instructor: "Dr. Sarah Chen", Time: "10:00 - 11:30", Location: "Lab 404", Type: "Science" },
+                { ID: "course_3", Day: "Wednesday", Title: "Advanced Typography", Instructor: "Prof. Marcus Aris", Time: "14:00 - 15:30", Location: "Room 402", Type: "Active Seminar" },
+                { ID: "course_4", Day: "Thursday", Title: "Cognitive Psychology", Instructor: "Dr. Sarah Chen", Time: "10:00 - 11:30", Location: "Lab 404", Type: "Science" },
+                { ID: "course_5", Day: "Friday", Title: "Architecture Basics", Instructor: "Prof. Thomas Gray", Time: "11:00 - 13:00", Location: "Studio 4A", Type: "Elective" }
+            ],
+            assignments: [
+                { ID: "task_1", Priority: "High Priority", DueDate: "Due in 2 days", Title: "Final Research Thesis: Modernist Architectures", Course: "Design Systems • ARC-402", Percentage: 65, EstHours: 8 },
+                { ID: "task_2", Priority: "Medium Priority", DueDate: "Due in 5 days", Title: "Comparative Analysis: Keynes vs Hayek", Course: "Economics • ECO-301", Percentage: 30, EstHours: 14 }
+            ],
+            notes: [
+                { ID: "note_1", Course: "ECON 302", Week: "Week 6", Tag: "Macro Equilibrium", Title: "Modern Economic Equilibrium Models", Subtitle: "Reviewing the Solow-Swan model and steady state capital dynamics.", Content: "The Solow–Swan model is an exogenous growth model, an economic model of long-run economic growth set within the framework of neoclassical economics." }
+            ],
+            checklist: [
+                { ID: "check_1", TaskName: "Advanced Macro Theory @ 10:00", Subtext: "Hall B • Required Lecture", IsCompleted: false },
+                { ID: "check_2", TaskName: "Interaction Design Studio @ 14:30", Subtext: "Studio 4 • Lab Study", IsCompleted: false }
+            ]
+        };
+
+        // Initialize App on DOM Loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            // Setup default view router
+            switchPage('dashboard');
+
+            // Boot charts
+            initChartCore();
+
+            // Populate workspace heatmap
+            initHeatmapMap();
+
+            // Set up dynamic greeting
+            setDynamicGreeting();
+
+            // Run clock engine
+            runClockEngine();
+            setInterval(runClockEngine, 1000);
+
+            // Fetch data from database Sheets
+            fetchSpreadsheetData();
+
+            // Set up parallax scroll progress bar
+            setupParallaxScroll();
+        });
+
+        // Fetch Data dari API Google Sheets (Apps Script)
+        function fetchSpreadsheetData() {
+            const refreshBtn = document.getElementById('sync-refresh-btn');
+            const statusBadge = document.getElementById('db-status-badge');
+            
+            if (refreshBtn) refreshBtn.classList.add('animate-spin');
+            
+            if (!APPS_SCRIPT_URL) {
+                console.log("Academic OS berjalan dalam 'Demo Mode' menggunakan database lokal (Mock Data).");
+                appState.db = JSON.parse(JSON.stringify(mockDatabase));
+                renderAllDynamicComponents();
+                
+                if (refreshBtn) refreshBtn.classList.remove('animate-spin');
+                if (statusBadge) {
+                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-yellow-500";
+                    statusBadge.title = "Demo Mode (Offline Local Database)";
+                }
+                return;
+            }
+
+            statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse";
+            statusBadge.title = "Menghubungkan ke database Sheets...";
+
+            fetch(`${APPS_SCRIPT_URL}?action=getData`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        appState.db.schedule = data.schedule;
+                        appState.db.assignments = data.assignments;
+                        appState.db.notes = data.notes;
+                        appState.db.checklist = data.checklist;
+
+                        renderAllDynamicComponents();
+                        showToast("Koneksi database sinkron!", "cloud_done");
+                        statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-green-500";
+                        statusBadge.title = "Tersambung ke Google Sheets Database Cloud";
+                    } else {
+                        throw new Error(data.message || "Gagal mengambil data");
+                    }
+                })
+                .catch(err => {
+                    console.error("Gagal sinkronisasi data cloud Sheets:", err);
+                    showToast("Koneksi cloud gagal. Menggunakan draf draf lokal.", "error");
+                    appState.db = JSON.parse(JSON.stringify(mockDatabase));
+                    renderAllDynamicComponents();
+                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-red-500";
+                    statusBadge.title = "Koneksi Google Sheets Error: " + err.message;
+                })
+                .finally(() => {
+                    if (refreshBtn) refreshBtn.classList.remove('animate-spin');
+                });
+        }
+
+        // Render Semua Komponen secara Dinamis Berdasarkan State Terkini
+        function renderAllDynamicComponents() {
+            renderDashboardClasses();
+            renderWeeklySchedule();
+            renderNotebookModule();
+            renderAssignmentsPage();
+            renderChecklist();
+        }
+
+        // 1. Dashboard Events renderer
+        function renderDashboardClasses() {
+            const container = document.getElementById('dashboard-today-classes');
+            const countLabel = document.getElementById('dashboard-events-count');
+            if (!container) return;
+            
+            container.innerHTML = "";
+            const todayClasses = appState.db.schedule.slice(0, 2); // Ambil 2 kegiatan teratas
+
+            countLabel.innerText = `${todayClasses.length} EVENT AKTIF`;
+
+            if (todayClasses.length === 0) {
+                container.innerHTML = `<p class="text-sm text-on-surface-variant italic">Tidak ada agenda kelas untuk hari ini.</p>`;
+                return;
+            }
+
+            todayClasses.forEach((cls, idx) => {
+                const colors = ["bg-primary", "bg-tertiary"];
+                const color = colors[idx % colors.length];
+                
+                const timeClean = cls.Time.split(" - ")[0]; // Ambil waktu jam mulai
+                
+                const card = document.createElement('div');
+                card.className = "flex items-center gap-6 p-4 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 hover:scale-[1.01] transition-all cursor-pointer group shadow-sm";
+                card.onclick = () => switchPage('schedule');
+                
+                card.innerHTML = `
+                    <div class="w-12 h-12 flex items-center justify-center rounded-xl ${color} text-white font-bold heading-font text-lg">${timeClean.replace(":", "")}</div>
+                    <div class="flex-grow">
+                        <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 font-medium uppercase tracking-wider">${cls.Type} • ${cls.Location}</p>
+                        <h5 class="heading-font text-lg font-bold text-on-surface dark:text-neutral-100">${cls.Title}</h5>
+                    </div>
+                    <span class="material-symbols-outlined text-outline group-hover:translate-x-1 group-hover:text-primary transition-all" data-icon="arrow_forward">arrow_forward</span>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 2. Render Calendar Mingguan (Menghilangkan Bingkai Kiri Tebal)
+        function renderWeeklySchedule() {
+            const grid = document.getElementById('schedule-weekly-grid');
+            if (!grid) return;
+
+            grid.innerHTML = "";
+            const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+            const indonesianDays = { Monday: "Senin", Tuesday: "Selasa", Wednesday: "Rabu", Thursday: "Kamis", Friday: "Jumat" };
+
+            days.forEach((day, index) => {
+                const dayColumn = document.createElement('div');
+                dayColumn.className = "space-y-4";
+
+                // Filter kelas berdasarkan hari
+                const classesForDay = appState.db.schedule.filter(cls => cls.Day === day);
+
+                dayColumn.innerHTML = `
+                    <div class="text-center pb-3 border-b border-outline-variant dark:border-neutral-800">
+                        <p class="heading-font text-[10px] font-bold uppercase tracking-[0.25em] text-outline dark:text-neutral-400">${indonesianDays[day]}</p>
+                        <p class="heading-font text-2xl font-extrabold dark:text-white mt-1">${14 + index}</p>
+                    </div>
+                `;
+
+                const cardsContainer = document.createElement('div');
+                cardsContainer.className = "space-y-4";
+
+                if (classesForDay.length === 0) {
+                    cardsContainer.innerHTML = `<p class="text-xs text-center text-on-surface-variant opacity-50 py-4">Kosong</p>`;
+                } else {
+                    classesForDay.forEach(cls => {
+                        const isWednesday = day === "Wednesday"; // Tambahkan highlight khusus rabu sebagai kelas berjalan
+                        const highlightClass = isWednesday 
+                            ? "bg-primary/5 dark:bg-neutral-800/40 border-primary/20 dark:border-neutral-700 hover:border-primary hover:bg-primary/[0.08]" 
+                            : "bg-white/50 dark:bg-neutral-900/40 border-neutral-200/60 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-white dark:hover:bg-neutral-900";
+                        
+                        const accentColor = isWednesday ? "bg-primary" : (index % 2 === 0 ? "bg-primary" : "bg-tertiary");
+
+                        const card = document.createElement('div');
+                        card.className = `group relative p-5 rounded-2xl border transition-all duration-300 cursor-pointer shadow-[0_2px_8px_-3px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.05)] ${highlightClass}`;
+                        
+                        card.innerHTML = `
+                            <div class="absolute left-0 top-1/4 bottom-1/4 w-[3px] ${accentColor} rounded-r-full scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-center"></div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between gap-2 flex-wrap">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-[10px] font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-300">
+                                        <span class="w-1.5 h-1.5 rounded-full ${accentColor}"></span>
+                                        ${cls.Type}
+                                    </span>
+                                    <span class="heading-font text-[11px] font-semibold text-neutral-400 dark:text-neutral-500 whitespace-nowrap">${cls.Time}</span>
+                                </div>
+                                <div>
+                                    <h4 class="heading-font text-[15px] font-bold text-neutral-800 dark:text-neutral-100 tracking-tight leading-snug group-hover:text-primary dark:group-hover:text-neutral-300 transition-colors">${cls.Title}</h4>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">${cls.Instructor}</p>
+                                </div>
+                                <div class="flex items-center gap-1.5 text-neutral-400 dark:text-neutral-500 text-[10px] font-bold uppercase tracking-wider pt-2 border-t border-dashed border-neutral-200/60 dark:border-neutral-800">
+                                    <span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 0, 'wght' 500">location_on</span>
+                                    <span>${cls.Location}</span>
+                                </div>
+                            </div>
+                        `;
+                        cardsContainer.appendChild(card);
+                    });
+                }
+
+                dayColumn.appendChild(cardsContainer);
+                grid.appendChild(dayColumn);
+            });
+        }
+
+        // 3. Render Notebook Side List
+        function renderNotebookModule() {
+            const listContainer = document.getElementById('notebook-list');
+            if (!listContainer) return;
+
+            listContainer.innerHTML = "";
+            
+            if (appState.db.notes.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-on-surface-variant italic p-4">Catatan masih kosong.</p>`;
+                return;
+            }
+
+            appState.db.notes.forEach(note => {
+                const isActive = note.ID === appState.activeNoteId;
+                const item = document.createElement('div');
+                
+                item.className = isActive 
+                    ? "p-4 rounded-2xl bg-white dark:bg-neutral-900 border border-primary shadow-sm cursor-pointer transition-all"
+                    : "p-4 rounded-2xl bg-surface-container-low dark:bg-neutral-900/45 hover:bg-white dark:hover:bg-neutral-900 border border-transparent cursor-pointer transition-all opacity-70";
+                
+                item.onclick = () => loadNoteToEditor(note.ID);
+                
+                item.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="heading-font text-sm font-bold dark:text-neutral-100">${note.Course}</span>
+                        <span class="heading-font text-[10px] text-outline dark:text-neutral-400">${note.Week || 'Week X'}</span>
+                    </div>
+                    <p class="text-xs text-on-surface-variant dark:text-neutral-400 mt-1 font-semibold">${note.Title}</p>
+                `;
+                listContainer.appendChild(item);
+            });
+
+            // Sinkronisasi data awal di editor jika activeNoteId diset
+            const activeNote = appState.db.notes.find(n => n.ID === appState.activeNoteId);
+            if (activeNote) {
+                document.getElementById('editor-tag-week').innerText = (activeNote.Week || "WEEK X").toUpperCase();
+                document.getElementById('editor-tag-course').innerText = (activeNote.Course || "ECON 302").toUpperCase();
+                document.getElementById('editor-title').innerText = activeNote.Title;
+                document.getElementById('editor-subtitle').innerText = activeNote.Subtitle;
+                document.getElementById('editor-content').innerText = activeNote.Content;
+            }
+        }
+
+        function loadNoteToEditor(noteId) {
+            appState.activeNoteId = noteId;
+            renderNotebookModule();
+            showToast("Memuat catatan kulian...", "folder_open");
+        }
+
+        // Menyimpan catatan di editor saat ini ke server Sheets
+        function saveCurrentNoteToServer() {
+            const activeNote = appState.db.notes.find(n => n.ID === appState.activeNoteId) || {};
+            
+            const updatedData = {
+                id: appState.activeNoteId || "note_" + new Date().getTime(),
+                course: document.getElementById('editor-tag-course').innerText,
+                week: document.getElementById('editor-tag-week').innerText,
+                tag: activeNote.Tag || "General",
+                title: document.getElementById('editor-title').innerText,
+                subtitle: document.getElementById('editor-subtitle').innerText,
+                content: document.getElementById('editor-content').innerText
+            };
+
+            showToast("Menyinkronkan catatan...", "sync");
+
+            if (!APPS_SCRIPT_URL) {
+                // Simpan secara lokal jika offline/demo
+                const idx = appState.db.notes.findIndex(n => n.ID === updatedData.id);
+                if (idx !== -1) {
+                    appState.db.notes[idx] = updatedData;
+                } else {
+                    appState.db.notes.push(updatedData);
+                }
+                renderNotebookModule();
+                showToast("Draf catatan disimpan secara lokal!", "cloud_queue");
+                return;
+            }
+
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" }, // Gunakan text/plain menghindari CORS pre-flight block di GAS
+                body: JSON.stringify({
+                    action: "saveNote",
+                    data: updatedData
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    showToast(data.message, "cloud_done");
+                    // Update cache state
+                    const idx = appState.db.notes.findIndex(n => n.ID === updatedData.id);
+                    if (idx !== -1) appState.db.notes[idx] = updatedData;
+                    else appState.db.notes.push(updatedData);
+                    renderNotebookModule();
+                } else {
+                    throw new Error(data.message);
+                }
+            })
+            .catch(err => {
+                console.error("Gagal simpan catatan:", err);
+                showToast("Sinkronisasi gagal, tersimpan sebagai draf lokal.", "error");
+            });
+        }
+
+        // 4. Render Tugas / Assignments Page
+        function renderAssignmentsPage() {
+            const container = document.getElementById('assignments-list-container');
+            if (!container) return;
+
+            container.innerHTML = "";
+
+            if (appState.db.assignments.length === 0) {
+                container.innerHTML = `<p class="text-sm italic text-on-surface-variant text-center py-8">Belum ada tugas.</p>`;
+                return;
+            }
+
+            appState.db.assignments.forEach(item => {
+                const priorityClass = item.Priority === "High Priority" 
+                    ? "bg-red-100 text-red-700 dark:bg-red-950/50 dark:text-red-300"
+                    : "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300";
+
+                const card = document.createElement('div');
+                card.className = "glass-card p-6 rounded-3xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 shadow-xs group hover:scale-[1.005]";
+                
+                card.innerHTML = `
+                    <div class="flex-grow space-y-3 w-full">
+                        <div class="flex gap-2 items-center">
+                            <span class="${priorityClass} text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">${item.Priority}</span>
+                            <span class="heading-font text-[10px] text-outline dark:text-neutral-400">${item.DueDate}</span>
+                        </div>
+                        <h5 class="heading-font text-xl font-bold text-on-surface dark:text-white">${item.Title}</h5>
+                        <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 font-semibold uppercase tracking-wider">${item.Course}</p>
+                        <!-- Linear progress -->
+                        <div class="space-y-1">
+                            <div class="w-full h-2 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary dark:bg-neutral-400 rounded-full" style="width: ${item.Percentage}%"></div>
+                            </div>
+                            <div class="flex justify-between text-[10px] text-outline dark:text-neutral-400 heading-font font-bold">
+                                <span>${item.Percentage}% SELESAI</span>
+                                <span>EST. ${item.EstHours} JAM BELAJAR</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex sm:flex-col gap-2 shrink-0">
+                        <button onclick="showToast('Ubah progres tugas ini...')" class="p-3 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-on-surface dark:text-white rounded-2xl interactive-btn shadow-xs">
+                            <span class="material-symbols-outlined text-sm">edit</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 5. Render Checklist Harian (Daily Focus)
+        function renderChecklist() {
+            const container = document.getElementById('daily-checklist-container');
+            if (!container) return;
+
+            container.innerHTML = "";
+            let completed = 0;
+            const list = appState.db.checklist;
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="text-xs text-on-surface-variant italic py-2">Tidak ada agenda harian.</p>`;
+                return;
+            }
+
+            list.forEach(item => {
+                const isChecked = item.IsCompleted === true || item.IsCompleted === "true";
+                if (isChecked) completed++;
+
+                const checkedClass = isChecked ? "opacity-45" : "";
+                const lineThrough = isChecked ? "line-through opacity-60" : "";
+                const checkIconVisibility = isChecked ? "" : "hidden";
+
+                const row = document.createElement('div');
+                row.className = `flex gap-3 items-start cursor-pointer group transition-all ${checkedClass}`;
+                row.onclick = () => toggleChecklistItemAPI(item.ID, !isChecked);
+
+                row.innerHTML = `
+                    <div class="mt-0.5 w-5 h-5 rounded-lg border-2 border-outline dark:border-neutral-600 group-hover:border-primary flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-sm text-primary dark:text-neutral-300 ${checkIconVisibility}">check</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="heading-font text-xs font-extrabold text-on-surface dark:text-neutral-100 leading-snug group-hover:text-primary dark:group-hover:text-neutral-300 ${lineThrough}">${item.TaskName}</p>
+                        <p class="heading-font text-[10px] text-outline dark:text-neutral-400 font-bold mt-0.5 uppercase tracking-wide">${item.Subtext}</p>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+
+            // Update Progress Bar
+            appState.totalFocusTasks = list.length;
+            appState.completedFocusTasks = completed;
+
+            const percent = list.length > 0 ? (completed / list.length) * 100 : 0;
+            document.getElementById('checklist-tracker-text').innerText = `${completed}/${list.length} Selesai`;
+            document.getElementById('checklist-tracker-bar').style.width = `${percent}%`;
+        }
+
+        // Handle Checklist Toggle status di Server / Lokal
+        function toggleChecklistItemAPI(itemId, newStatus) {
+            showToast("Memperbarui status tugas...", "sync");
+
+            // Update local cache state
+            const idx = appState.db.checklist.findIndex(c => c.ID === itemId);
+            if (idx !== -1) {
+                appState.db.checklist[idx].IsCompleted = newStatus;
+                renderChecklist();
+            }
+
+            if (!APPS_SCRIPT_URL) {
+                showToast("Status tugas disimpan secara lokal!", "cloud_queue");
+                return;
+            }
+
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify({
+                    action: "toggleChecklist",
+                    id: itemId,
+                    isCompleted: newStatus
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    showToast(data.message, "cloud_done");
+                } else {
+                    throw new Error(data.message);
+                }
+            })
+            .catch(err => {
+                console.error("Gagal simpan status checklist:", err);
+                showToast("Gagal update cloud, draf lokal disimpan.", "error");
+            });
+        }
+
+        // Modal triggers: Add Course (Schedule)
+        function openAddCourseModal() {
+            const modal = document.getElementById('addCourseModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+                modal.querySelector('.transform').classList.remove('scale-95');
+            }, 50);
+        }
+
+        function closeAddCourseModal() {
+            const modal = document.getElementById('addCourseModal');
+            modal.querySelector('.transform').classList.add('scale-95');
+            modal.classList.add('opacity-100');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Submit New Course to Google Sheet Database
+        function submitNewCourse() {
+            const title = document.getElementById('course-title').value;
+            const instructor = document.getElementById('course-instructor').value;
+            const day = document.getElementById('course-day').value;
+            const time = document.getElementById('course-time').value;
+            const location = document.getElementById('course-location').value;
+            const type = document.getElementById('course-type').value;
+
+            if (!title || !time || !location) {
+                showToast("Form tidak boleh kosong!", "warning");
+                return;
+            }
+
+            const item = { day, title, instructor, time, location, type };
+
+            showToast("Menyimpan kelas baru...", "sync");
+
+            if (!APPS_SCRIPT_URL) {
+                item.ID = "course_" + new Date().getTime();
+                appState.db.schedule.push(item);
+                renderAllDynamicComponents();
+                closeAddCourseModal();
+                showToast("Mata kuliah baru disimpan lokal!", "cloud_queue");
+                return;
+            }
+
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify({ action: "addCourse", data: item })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    item.ID = data.id;
+                    appState.db.schedule.push(item);
+                    renderAllDynamicComponents();
+                    closeAddCourseModal();
+                    showToast(data.message, "cloud_done");
+                }
+            })
+            .catch(err => showToast("Gagal menyimpan ke cloud.", "error"));
+        }
+
+        // Modal triggers: Add Assignment
+        function openAddAssignmentModal() {
+            const modal = document.getElementById('addAssignmentModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+                modal.querySelector('.transform').classList.remove('scale-95');
+            }, 50);
+        }
+
+        function closeAddAssignmentModal() {
+            const modal = document.getElementById('addAssignmentModal');
+            modal.querySelector('.transform').classList.add('scale-95');
+            modal.classList.add('opacity-100');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Submit New Assignment data
+        function submitNewAssignment() {
+            const title = document.getElementById('task-title').value;
+            const course = document.getElementById('task-course').value;
+            const priority = document.getElementById('task-priority').value;
+            const dueDate = document.getElementById('task-duedate').value;
+            const estHours = document.getElementById('task-est').value || 1;
+            const percentage = document.getElementById('task-percent').value || 0;
+
+            if (!title || !course || !dueDate) {
+                showToast("Form wajib diisi!", "warning");
+                return;
+            }
+
+            const item = { priority, dueDate, title, course, percentage, estHours };
+
+            showToast("Menyimpan tugas...", "sync");
+
+            if (!APPS_SCRIPT_URL) {
+                item.ID = "task_" + new Date().getTime();
+                appState.db.assignments.push(item);
+                renderAllDynamicComponents();
+                closeAddAssignmentModal();
+                showToast("Tugas baru disimpan lokal!", "cloud_queue");
+                return;
+            }
+
+            fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify({ action: "addAssignment", data: item })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    item.ID = data.id;
+                    appState.db.assignments.push(item);
+                    renderAllDynamicComponents();
+                    closeAddAssignmentModal();
+                    showToast(data.message, "cloud_done");
+                }
+            })
+            .catch(err => showToast("Gagal menyimpan ke cloud.", "error"));
+        }
+
+
+        // =========================================================================
+        // SCRIPT FRONTEND KONTROLLER DAN NAVIGASI
+        // =========================================================================
+
+        // Router View Controller
+        function switchPage(pageId) {
+            appState.currentPage = pageId;
+
+            const activePage = document.querySelector('.page-view.active');
+            if (activePage) {
+                gsap.to(activePage, {
+                    opacity: 0,
+                    y: 15,
+                    duration: 0.25,
+                    onComplete: () => {
+                        activePage.classList.remove('active');
+                        revealPage(pageId);
+                    }
+                });
+            } else {
+                revealPage(pageId);
+            }
+
+            document.querySelectorAll('[data-nav]').forEach(btn => {
+                const indicator = btn.querySelector('.nav-indicator');
+                if (btn.getAttribute('data-nav') === pageId) {
+                    btn.classList.add('bg-surface-container', 'dark:bg-neutral-800');
+                    if (indicator) {
+                        indicator.style.opacity = '1';
+                        indicator.style.transform = 'scale(1)';
+                    }
+                } else {
+                    btn.classList.remove('bg-surface-container', 'dark:bg-neutral-800');
+                    if (indicator) {
+                        indicator.style.opacity = '0';
+                        indicator.style.transform = 'scale(0.5)';
+                    }
+                }
+            });
+
+            const titles = {
+                dashboard: 'Workspace Dashboard',
+                schedule: 'Course Schedule Planner',
+                notebook: 'Advanced Synthesis Notebook',
+                assignments: 'Assignments & Task Matrices',
+                analytics: 'Statistics & Deep Insights'
+            };
+            document.getElementById('app-bar-title').innerText = titles[pageId] || 'Workspace Dashboard';
+            document.getElementById('scroll-progress').style.width = '0%';
+        }
+
+        function revealPage(pageId) {
+            const target = document.getElementById(`view-${pageId}`);
+            if (target) {
+                target.classList.add('active');
+                gsap.fromTo(target, {
+                    opacity: 0,
+                    y: 15
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.45,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        if (pageId === 'analytics') {
+                            reflectiveChartInstance.update();
+                            moodSpectrumChartInstance.update();
+                        } else if (pageId === 'dashboard') {
+                            dashboardStudyChartInstance.update();
+                        }
+                    }
+                });
+            }
+        }
+
+        // Global Search Filter engine
+        function handleGlobalSearch(term) {
+            const searchVal = term.toLowerCase();
+            showToast(`Mencari elemen: "${term}"`, 'search');
+
+            if (appState.currentPage === 'assignments') {
+                document.querySelectorAll('#view-assignments .glass-card').forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    card.style.display = text.includes(searchVal) ? 'flex' : 'none';
+                });
+            } else if (appState.currentPage === 'schedule') {
+                document.querySelectorAll('#schedule-weekly-grid .group').forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    card.style.display = text.includes(searchVal) ? 'block' : 'none';
+                });
+            }
+        }
+
+        // Custom Premium Toast Pop-ups
+        function showToast(msg, icon = 'info') {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-msg');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.innerText = msg.toUpperCase();
+            toastIcon.innerText = icon;
+
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Dark / Light Premium Toggle Theme Logic
+        function toggleTheme() {
+            const doc = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+
+            if (doc.classList.contains('dark')) {
+                doc.classList.remove('dark');
+                doc.classList.add('light');
+                themeIcon.innerText = 'bedtime';
+                appState.currentTheme = 'light';
+                showToast('Light Mode diaktifkan', 'light_mode');
+            } else {
+                doc.classList.remove('light');
+                doc.classList.add('dark');
+                themeIcon.innerText = 'light_mode';
+                appState.currentTheme = 'dark';
+                showToast('Dark Mode diaktifkan', 'dark_mode');
+            }
+            updateChartThemes();
+        }
+
+        // Sidebar Collapse Trigger logic
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main-content');
+            const icon = document.getElementById('collapse-icon');
+            const textElements = document.querySelectorAll('.nav-text');
+
+            if (appState.isSidebarCollapsed) {
+                sidebar.style.width = '16rem';
+                main.style.marginLeft = '16rem';
+                icon.innerText = 'first_page';
+                textElements.forEach(el => el.style.display = 'inline');
+                appState.isSidebarCollapsed = false;
+            } else {
+                sidebar.style.width = '5rem';
+                main.style.marginLeft = '5rem';
+                icon.innerText = 'last_page';
+                textElements.forEach(el => el.style.display = 'none');
+                appState.isSidebarCollapsed = true;
+            }
+        }
+
+        // Interactive Pomodoro Clock Logic
+        function togglePomodoro() {
+            const triggerText = document.getElementById('pomo-play-text');
+            const triggerIcon = document.getElementById('pomo-play-icon');
+            const clockIcon = document.getElementById('pomo-clock-icon');
+
+            if (appState.pomoRunning) {
+                clearInterval(appState.pomoInterval);
+                appState.pomoRunning = false;
+                triggerText.innerText = 'Lanjutkan';
+                triggerIcon.innerText = 'play_arrow';
+                clockIcon.classList.remove('animate-spin');
+                showToast('Pomodoro dihentikan sementara.', 'pause');
+            } else {
+                appState.pomoRunning = true;
+                triggerText.innerText = 'Jeda Fokus';
+                triggerIcon.innerText = 'pause';
+                clockIcon.classList.add('animate-spin');
+                showToast('Sesi belajar Pomodoro dimulai!', 'hourglass');
+
+                appState.pomoInterval = setInterval(() => {
+                    appState.pomoTimeLeft--;
+                    updatePomoDisplay();
+
+                    if (appState.pomoTimeLeft <= 0) {
+                        clearInterval(appState.pomoInterval);
+                        appState.pomoRunning = false;
+                        appState.pomoTimeLeft = 25 * 60;
+                        triggerText.innerText = 'Mulai Kembali';
+                        triggerIcon.innerText = 'restart_alt';
+                        clockIcon.classList.remove('animate-spin');
+                        showToast('Sesi selesai! Waktunya istirahat.', 'notifications_active');
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetPomodoro() {
+            clearInterval(appState.pomoInterval);
+            appState.pomoRunning = false;
+            appState.pomoTimeLeft = 25 * 60;
+            updatePomoDisplay();
+            
+            document.getElementById('pomo-play-text').innerText = 'Start Pomo';
+            document.getElementById('pomo-play-icon').innerText = 'play_arrow';
+            document.getElementById('pomo-clock-icon').classList.remove('animate-spin');
+            
+            showToast('Timer diatur ulang.', 'history');
+        }
+
+        function updatePomoDisplay() {
+            const timeEl = document.getElementById('pomo-time');
+            const progressCircle = document.getElementById('pomo-progress');
+            
+            const minutes = Math.floor(appState.pomoTimeLeft / 60);
+            const seconds = appState.pomoTimeLeft % 60;
+            timeEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            const totalCircumference = 175.9; 
+            const progress = (25 * 60 - appState.pomoTimeLeft) / (25 * 60);
+            const offset = totalCircumference * (1 - progress);
+            progressCircle.style.strokeDashoffset = offset;
+        }
+
+        // Live Realtime Clock Engine
+        function runClockEngine() {
+            const timeSpan = document.getElementById('live-time');
+            const dateSpan = document.getElementById('live-date');
+            
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+
+            timeSpan.innerHTML = `${now.toLocaleTimeString('en-US', timeOptions)} • SEMESTER GANJIL`;
+            dateSpan.textContent = now.toLocaleDateString('id-ID', dateOptions);
+        }
+
+        // Greeting dynamic set
+        function setDynamicGreeting() {
+            const hour = new Date().getHours();
+            const greetEl = document.getElementById('dashboard-greeting');
+            let text = "Selamat datang kembali, Julian";
+
+            if (hour < 11) text = "Selamat pagi, Julian";
+            else if (hour < 15) text = "Selamat siang, Julian";
+            else if (hour < 18) text = "Selamat sore, Julian";
+            else text = "Selamat malam, Julian";
+
+            greetEl.innerText = text;
+        }
+
+        // Dynamic Interactive Heatmap Matrix generator
+        function initHeatmapMap() {
+            const container = document.getElementById('activityMapGrid');
+            if (!container) return;
+
+            for (let i = 0; i < 52; i++) {
+                const col = document.createElement('div');
+                col.className = "flex flex-col gap-1.5 min-w-[12px]";
+                
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('div');
+                    const weight = Math.random();
+                    let color = "bg-neutral-200 dark:bg-neutral-800"; 
+                    
+                    if (weight > 0.8) color = "bg-primary dark:bg-neutral-300"; 
+                    else if (weight > 0.5) color = "bg-primary/55 dark:bg-neutral-400/55";
+                    else if (weight > 0.25) color = "bg-neutral-300 dark:bg-neutral-700";
+
+                    cell.className = `w-3 h-3 rounded-[3px] transition-all hover:scale-125 cursor-pointer ${color}`;
+                    
+                    cell.addEventListener('mouseenter', () => {
+                        const score = Math.floor(weight * 100);
+                        showToast(`Skor Fokus: ${score}% pada hari ${j+1}, minggu ${i+1}`, 'insights');
+                    });
+
+                    col.appendChild(cell);
+                }
+                container.appendChild(col);
+            }
+        }
+
+        // Toggle mobile responsive sidebar menu
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.transform === 'translateX(0px)') {
+                sidebar.style.transform = 'translateX(-100%)';
+            } else {
+                sidebar.style.transform = 'translateX(0px)';
+                sidebar.classList.add('shadow-2xl');
+            }
+        }
+
+        // Smooth Scroll progress listener
+        function setupParallaxScroll() {
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('scroll-progress').style.width = scrolled + "%";
+            });
+        }
+
+        // GRAPHICS AND CHART CORE STATE CONTROLLERS
+        let dashboardStudyChartInstance;
+        let reflectiveChartInstance;
+        let moodSpectrumChartInstance;
+
+        function initChartCore() {
+            const barCtx = document.getElementById('dashboardStudyChart').getContext('2d');
+            dashboardStudyChartInstance = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['S', 'S', 'R', 'K', 'J', 'S', 'M'],
+                    datasets: [{
+                        label: 'Jam Belajar',
+                        data: [4.2, 5.8, 3.1, 6.2, 7.8, 2.3, 3.0],
+                        backgroundColor: '#5d5f5f',
+                        borderRadius: 6,
+                        borderSkipped: false,
+                        barThickness: 16
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { display: false, grid: { display: false } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            const lineCtx = document.getElementById('reflectiveStudyChart').getContext('2d');
+            reflectiveChartInstance = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                    datasets: [{
+                        data: [620, 840, 520, 710, 920, 410, 580],
+                        borderColor: '#5a614f',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        backgroundColor: 'rgba(90, 97, 79, 0.08)',
+                        pointBackgroundColor: '#5a614f',
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: 'rgba(236,236,236,0.5)' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            const donutCtx = document.getElementById('moodSpectrumChart').getContext('2d');
+            moodSpectrumChartInstance = new Chart(donutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Tenang', 'Terinspirasi', 'Melamun'],
+                    datasets: [{
+                        data: [45, 25, 30],
+                        backgroundColor: ['#5e604f', '#dee5cf', '#444748'],
+                        borderWidth: 3,
+                        borderColor: '#fcf9f8'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                font: { family: 'Hanken Grotesk', size: 11, weight: 'bold' }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
+        // Toggle custom reflective dataset
+        function updateReflectiveGraph(range) {
+            showToast(`Loading study consistency records for: ${range}`);
+            const dataSets = {
+                '7D': [620, 840, 520, 710, 920, 410, 580],
+                '1M': [720, 680, 890, 940, 610, 740, 830]
+            };
+            reflectiveChartInstance.data.datasets[0].data = dataSets[range] || dataSets['7D'];
+            reflectiveChartInstance.update();
+        }
+
+        // Sync colors ketika beralih tema
+        function updateChartThemes() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(236,236,236,0.5)';
+            const textColor = isDark ? '#f3f0f0' : '#1b1c1c';
+
+            reflectiveChartInstance.options.scales.y.grid.color = gridColor;
+            reflectiveChartInstance.options.scales.y.ticks.color = textColor;
+            reflectiveChartInstance.options.scales.x.ticks.color = textColor;
+            reflectiveChartInstance.update();
+
+            dashboardStudyChartInstance.options.scales.x.ticks.color = textColor;
+            dashboardStudyChartInstance.data.datasets[0].backgroundColor = isDark ? '#cbd5e1' : '#5d5f5f';
+            dashboardStudyChartInstance.update();
+        }
+    </script>
+</body>
+</html>
