@@ -201,19 +201,19 @@
     <!-- Collapsible Premium Side Navigation -->
     <aside id="sidebar" class="fixed left-0 top-0 h-screen w-64 border-r border-outline-variant dark:border-neutral-800 bg-surface dark:bg-neutral-950 flex flex-col py-8 px-6 z-50 transition-all duration-300">
         <div class="mb-10 flex items-center justify-between">
-            <div>
+            <div class="flex flex-col overflow-hidden">
                 <h1 class="heading-font text-2xl font-extrabold tracking-tighter text-on-surface dark:text-white flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary dark:text-neutral-400">layers</span>
-                    Academic OS
+                    <span class="material-symbols-outlined text-primary dark:text-neutral-400 shrink-0">layers</span>
+                    <span class="nav-text whitespace-nowrap">Academic OS</span>
                 </h1>
-                <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 opacity-70 tracking-wide font-semibold flex items-center gap-1.5">
-                    Fall Semester 2024
+                <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 opacity-70 tracking-wide font-semibold flex items-center gap-1.5 mt-1">
+                    <span class="nav-text whitespace-nowrap">Fall Semester 2024</span>
                     <!-- Status Database Connection Badge -->
-                    <span id="db-status-badge" class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500" title="Memeriksa status database..."></span>
+                    <span id="db-status-badge" class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 shrink-0" title="Memeriksa status database..."></span>
                 </p>
             </div>
             <!-- Minimal Collapse Trigger (Desktop & Tablet) -->
-            <button onclick="toggleSidebar()" class="p-1 rounded hover:bg-surface-container-low dark:hover:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 hidden md:block">
+            <button onclick="toggleSidebar()" class="p-1 rounded hover:bg-surface-container-low dark:hover:bg-neutral-800 text-on-surface-variant dark:text-neutral-400 hidden md:block shrink-0 ml-auto">
                 <span id="collapse-icon" class="material-symbols-outlined text-xl">first_page</span>
             </button>
         </div>
@@ -252,25 +252,13 @@
             <span class="material-symbols-outlined text-sm" data-icon="add">edit_note</span>
             <span class="nav-text">Catatan Cepat</span>
         </button>
-
-        <!-- Sidebar Footer -->
-        <div class="space-y-3 border-t border-outline-variant dark:border-neutral-800 pt-6">
-            <button onclick="showToast('Pengaturan dibuka!')" class="w-full flex items-center gap-3 text-on-surface-variant dark:text-neutral-400 opacity-70 hover:opacity-100 transition-opacity heading-font text-sm font-semibold">
-                <span class="material-symbols-outlined">settings</span>
-                <span class="nav-text">Settings</span>
-            </button>
-            <button onclick="showToast('Menghubungi support developer...')" class="w-full flex items-center gap-3 text-on-surface-variant dark:text-neutral-400 opacity-70 hover:opacity-100 transition-opacity heading-font text-sm font-semibold">
-                <span class="material-symbols-outlined">help</span>
-                <span class="nav-text">Support</span>
-            </button>
-        </div>
     </aside>
 
     <!-- Unified Main Canvas Container -->
     <main id="main-content" class="ml-64 min-h-screen transition-all duration-300">
         
         <!-- Premium Dual-Mode Top App Bar -->
-        <header class="sticky top-0 z-40 w-full px-6 md:px-12 py-4 flex justify-between items-center bg-surface/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-outline-variant dark:border-neutral-800">
+        <header class="sticky top-0 z-40 w-full px-6 md:px-12 py-4 flex justify-between items-center bg-surface/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-b-outline-variant dark:border-neutral-800">
             <div class="flex items-center gap-4">
                 <button onclick="toggleMobileMenu()" class="p-2 rounded-xl hover:bg-surface-container-low dark:hover:bg-neutral-800 md:hidden text-on-surface dark:text-white">
                     <span class="material-symbols-outlined">menu</span>
@@ -286,8 +274,8 @@
                 </div>
 
                 <div class="flex items-center gap-2 md:gap-4">
-                    <!-- Global Sheet Sync Refresh Button -->
-                    <button id="sync-refresh-btn" onclick="fetchSpreadsheetData()" class="p-2 hover:bg-surface-container-high dark:hover:bg-neutral-800 rounded-full transition-all text-on-surface-variant dark:text-neutral-400 relative" title="Sinkronisasi manual database">
+                    <!-- Global Sheet Sync Refresh Button (No background card, no border) -->
+                    <button id="sync-refresh-btn" onclick="fetchSpreadsheetData()" class="p-2 text-on-surface-variant dark:text-neutral-400 hover:text-primary dark:hover:text-neutral-200 transition-all relative" title="Sinkronisasi manual database">
                         <span class="material-symbols-outlined">sync</span>
                     </button>
                     <!-- Notifications -->
@@ -308,7 +296,7 @@
                         <div class="w-10 h-10 rounded-full bg-tertiary-container overflow-hidden border border-outline-variant dark:border-neutral-800 shadow-sm">
                             <img class="w-full h-full object-cover" alt="Student Profile Picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBcFSAHjjq6fi5i3iberZu5aQPP2aP_ZVRiLWeGEZE3Ai7bmzwufMm1zfv38aHJThVSK9gDlOYlISeqCUGR1TeQyV9gvkqI4T9XCNKW8hJGwSu2--e0Lv6PAZ-Nb28FZUIY3mfa1zp822alOSqNQQ-GxSzMqFTR8W00xFXDl5ihmoHaMdyJYVzJ0UX810cJDhTGSSWeoxNcYueo3JSDqo-GEXDRlWNSj_ZVupUHUyP-FtTeQz8PhNBN9h4Bpf_qvLDVjlrO9sKQLpA"/>
                         </div>
-                        <span class="heading-font font-bold text-sm hidden lg:block text-on-surface dark:text-neutral-200">Julian S.</span>
+                        <span class="heading-font font-bold text-sm hidden lg:block text-on-surface dark:text-neutral-200">Irwan S.</span>
                     </div>
                 </div>
             </div>
@@ -319,12 +307,12 @@
             <!-- Dynamic Greetings & Metrics -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-outline-variant dark:border-neutral-800 pb-8">
                 <div>
-                    <h3 id="dashboard-greeting" class="heading-font text-4xl md:text-5xl font-light text-on-surface dark:text-white mb-2">Welcome back, Julian</h3>
+                    <h3 id="dashboard-greeting" class="heading-font text-4xl md:text-5xl font-light text-on-surface dark:text-white mb-2">Welcome back, Irwan</h3>
                     <p class="text-base md:text-lg text-on-surface-variant dark:text-neutral-400 italic">"The beautiful thing about learning is that no one can take it away from you."</p>
                 </div>
                 <div class="text-left md:text-right space-y-1">
-                    <p id="live-date" class="heading-font text-2xl text-primary dark:text-neutral-400 font-bold">October 24, 2024</p>
-                    <p id="live-time" class="heading-font text-xs tracking-widest text-on-surface-variant dark:text-neutral-500 font-semibold uppercase">10:45 AM • FALL SEMESTER</p>
+                    <p id="live-date" class="heading-font text-2xl text-primary dark:text-neutral-400 font-bold">Kamis, 25 Juni 2026</p>
+                    <p id="live-time" class="heading-font text-xs tracking-widest text-on-surface-variant dark:text-neutral-500 font-semibold uppercase">20:31:18 WIB • SEMESTER GANJIL</p>
                 </div>
             </div>
 
@@ -350,7 +338,7 @@
                         <div class="w-12 h-12 bg-primary-container dark:bg-neutral-800 rounded-full flex items-center justify-center animate-bounce">
                             <span class="material-symbols-outlined text-primary dark:text-neutral-400" data-icon="tips_and_updates">tips_and_updates</span>
                         </div>
-                        <p class="text-sm text-on-surface-variant dark:text-neutral-300">Target Selanjutnya: <span class="font-bold text-on-surface dark:text-white underline">Menganalisis Steady State</span> di menu Notebook.</p>
+                        <p class="text-sm text-on-surface-variant dark:text-neutral-300">Target Selanjutnya: <span class="font-bold text-on-surface dark:text-white underline">Mulai menulis catatan</span> di menu Notebook.</p>
                     </div>
                 </div>
 
@@ -406,10 +394,10 @@
                             <p class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1">32.4j</p>
                         </div>
                         <div class="p-4 bg-surface-container-low dark:bg-neutral-900 rounded-2xl border border-neutral-100 dark:border-neutral-800">
-                            <p class="heading-font text-[10px] text-outline dark:text-neutral-400 font-extrabold tracking-wider uppercase">STREAK AKTIF</p>
+                            <p class="heading-font text-[10px] text-outline dark:text-neutral-400 font-extrabold tracking-wider uppercase">RATA-RATA HARIAN</p>
                             <p class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1 flex items-center gap-1">
-                                12 Hari
-                                <span class="material-symbols-outlined text-amber-500 fill-1" style="font-variation-settings: 'FILL' 1">local_fire_department</span>
+                                4.6j
+                                <span class="material-symbols-outlined text-amber-500 fill-1" style="font-variation-settings: 'FILL' 1">schedule</span>
                             </p>
                         </div>
                     </div>
@@ -574,11 +562,11 @@
                     <article class="space-y-6">
                         <header class="border-b border-outline-variant dark:border-neutral-800 pb-6">
                             <div class="flex gap-2 mb-3">
-                                <span id="editor-tag-week" class="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-300 heading-font text-[9px] font-bold uppercase rounded-lg">WEEK 6</span>
-                                <span id="editor-tag-course" class="px-2 py-0.5 bg-primary/10 text-primary dark:text-neutral-300 heading-font text-[9px] font-bold uppercase rounded-lg">ECON 302</span>
+                                <span id="editor-tag-week" class="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-300 heading-font text-[9px] font-bold uppercase rounded-lg">WEEK 1</span>
+                                <span id="editor-tag-course" class="px-2 py-0.5 bg-primary/10 text-primary dark:text-neutral-300 heading-font text-[9px] font-bold uppercase rounded-lg">COURSE 101</span>
                             </div>
-                            <h1 id="editor-title" class="heading-font text-3xl md:text-4xl font-extrabold text-on-surface dark:text-white" contenteditable="true">Modern Economic Equilibrium Models</h1>
-                            <p id="editor-subtitle" class="text-sm text-on-surface-variant dark:text-neutral-400 mt-2 italic" contenteditable="true">Reviewing the Solow-Swan model and steady state capital dynamics.</p>
+                            <h1 id="editor-title" class="heading-font text-3xl md:text-4xl font-extrabold text-on-surface dark:text-white" contenteditable="true">Judul Catatan Baru</h1>
+                            <p id="editor-subtitle" class="text-sm text-on-surface-variant dark:text-neutral-400 mt-2 italic" contenteditable="true">Tuliskan ringkasan materi atau deskripsi sub-catatan di sini...</p>
                         </header>
 
                         <!-- Content Editable Note Area -->
@@ -675,28 +663,26 @@
                 <div class="bg-surface-container-low dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl flex flex-col justify-between">
                     <div class="space-y-1">
                         <span class="heading-font text-xs font-extrabold text-outline dark:text-neutral-400 uppercase tracking-widest">Total Jurnal</span>
-                        <h2 class="heading-font text-4xl font-extrabold dark:text-white">184 Entry Logs</h2>
+                        <h2 class="heading-font text-4xl font-extrabold dark:text-white">0 Entry Logs</h2>
                     </div>
                     <div class="flex items-center gap-1 mt-6 text-green-600 dark:text-green-400 heading-font text-xs font-bold">
                         <span class="material-symbols-outlined text-sm">trending_up</span>
-                        <span>+12% dari bulan lalu</span>
+                        <span>Mulai menulis untuk tren</span>
                     </div>
                 </div>
                 <!-- Stat Card 2 -->
                 <div class="bg-secondary-container dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl flex flex-col justify-between">
                     <div class="space-y-1">
                         <span class="heading-font text-xs font-extrabold text-outline dark:text-neutral-300 uppercase tracking-widest">Hari Paling Produktif</span>
-                        <h2 class="heading-font text-4xl font-extrabold dark:text-white">Selasa</h2>
+                        <h2 class="heading-font text-4xl font-extrabold dark:text-white">-</h2>
                     </div>
-                    <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 italic">Rata-rata 840 kata ditulis harian</p>
+                    <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 italic">Belum ada statistik belajar</p>
                 </div>
                 <!-- Stat Card 3 -->
                 <div class="bg-surface-container-low dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl space-y-4">
                     <span class="heading-font text-xs font-extrabold text-outline dark:text-neutral-400 uppercase tracking-widest block">Tema Utama</span>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-tertiary-container dark:bg-neutral-800 text-on-tertiary-container dark:text-neutral-200 rounded-full heading-font text-[10px] font-bold">MINDFULNESS</span>
-                        <span class="px-3 py-1 bg-surface-container-highest dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-200 rounded-full heading-font text-[10px] font-bold">KARIR</span>
-                        <span class="px-3 py-1 bg-tertiary-container dark:bg-neutral-800 text-on-tertiary-container dark:text-neutral-200 rounded-full heading-font text-[10px] font-bold">GRATITUDE</span>
+                        <span class="px-3 py-1 bg-surface-container-highest dark:bg-neutral-800 text-on-surface-variant dark:text-neutral-200 rounded-full heading-font text-[10px] font-bold">BELUM ADA DATA</span>
                     </div>
                 </div>
             </div>
@@ -867,10 +853,10 @@
             pomoRunning: false,
             pomoTimeLeft: 25 * 60, 
             pomoInterval: null,
-            totalFocusTasks: 2,
+            totalFocusTasks: 0,
             completedFocusTasks: 0,
-            activeNoteId: 'note_1',
-            // Local DB Cache
+            activeNoteId: '',
+            // Local DB Cache (Initialized as EMPTY as requested)
             db: {
                 schedule: [],
                 assignments: [],
@@ -878,53 +864,6 @@
                 checklist: []
             }
         };
-
-        // Fallback Mock Data jika database sheets belum diset
-        const mockDatabase = {
-            schedule: [
-                { ID: "course_1", Day: "Monday", Title: "Systems Thinking", Instructor: "Prof. Elena Vance", Time: "09:00 - 10:30", Location: "Studio 2B", Type: "Core Course" },
-                { ID: "course_2", Day: "Tuesday", Title: "Cognitive Psychology", Instructor: "Dr. Sarah Chen", Time: "10:00 - 11:30", Location: "Lab 404", Type: "Science" },
-                { ID: "course_3", Day: "Wednesday", Title: "Advanced Typography", Instructor: "Prof. Marcus Aris", Time: "14:00 - 15:30", Location: "Room 402", Type: "Active Seminar" },
-                { ID: "course_4", Day: "Thursday", Title: "Cognitive Psychology", Instructor: "Dr. Sarah Chen", Time: "10:00 - 11:30", Location: "Lab 404", Type: "Science" },
-                { ID: "course_5", Day: "Friday", Title: "Architecture Basics", Instructor: "Prof. Thomas Gray", Time: "11:00 - 13:00", Location: "Studio 4A", Type: "Elective" }
-            ],
-            assignments: [
-                { ID: "task_1", Priority: "High Priority", DueDate: "Due in 2 days", Title: "Final Research Thesis: Modernist Architectures", Course: "Design Systems • ARC-402", Percentage: 65, EstHours: 8 },
-                { ID: "task_2", Priority: "Medium Priority", DueDate: "Due in 5 days", Title: "Comparative Analysis: Keynes vs Hayek", Course: "Economics • ECO-301", Percentage: 30, EstHours: 14 }
-            ],
-            notes: [
-                { ID: "note_1", Course: "ECON 302", Week: "Week 6", Tag: "Macro Equilibrium", Title: "Modern Economic Equilibrium Models", Subtitle: "Reviewing the Solow-Swan model and steady state capital dynamics.", Content: "The Solow–Swan model is an exogenous growth model, an economic model of long-run economic growth set within the framework of neoclassical economics." }
-            ],
-            checklist: [
-                { ID: "check_1", TaskName: "Advanced Macro Theory @ 10:00", Subtext: "Hall B • Required Lecture", IsCompleted: false },
-                { ID: "check_2", TaskName: "Interaction Design Studio @ 14:30", Subtext: "Studio 4 • Lab Study", IsCompleted: false }
-            ]
-        };
-
-        // Initialize App on DOM Loaded
-        window.addEventListener('DOMContentLoaded', () => {
-            // Setup default view router
-            switchPage('dashboard');
-
-            // Boot charts
-            initChartCore();
-
-            // Populate workspace heatmap
-            initHeatmapMap();
-
-            // Set up dynamic greeting
-            setDynamicGreeting();
-
-            // Run clock engine
-            runClockEngine();
-            setInterval(runClockEngine, 1000);
-
-            // Fetch data from database Sheets
-            fetchSpreadsheetData();
-
-            // Set up parallax scroll progress bar
-            setupParallaxScroll();
-        });
 
         // Fetch Data dari API Google Sheets (Apps Script)
         function fetchSpreadsheetData() {
@@ -934,33 +873,32 @@
             if (refreshBtn) refreshBtn.classList.add('animate-spin');
             
             if (!APPS_SCRIPT_URL) {
-                console.log("Academic OS berjalan dalam 'Demo Mode' menggunakan database lokal (Mock Data).");
-                appState.db = JSON.parse(JSON.stringify(mockDatabase));
+                console.log("Academic OS berjalan dalam 'Kosong Mode' menunggu konfigurasi APPS_SCRIPT_URL.");
                 renderAllDynamicComponents();
                 
                 if (refreshBtn) refreshBtn.classList.remove('animate-spin');
                 if (statusBadge) {
-                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-yellow-500";
-                    statusBadge.title = "Demo Mode (Offline Local Database)";
+                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 shrink-0";
+                    statusBadge.title = "Belum Terhubung Database (Menampilkan Data Kosong)";
                 }
                 return;
             }
 
-            statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse";
+            statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shrink-0";
             statusBadge.title = "Menghubungkan ke database Sheets...";
 
             fetch(`${APPS_SCRIPT_URL}?action=getData`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === "success") {
-                        appState.db.schedule = data.schedule;
-                        appState.db.assignments = data.assignments;
-                        appState.db.notes = data.notes;
-                        appState.db.checklist = data.checklist;
+                        appState.db.schedule = data.schedule || [];
+                        appState.db.assignments = data.assignments || [];
+                        appState.db.notes = data.notes || [];
+                        appState.db.checklist = data.checklist || [];
 
                         renderAllDynamicComponents();
                         showToast("Koneksi database sinkron!", "cloud_done");
-                        statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-green-500";
+                        statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-green-500 shrink-0";
                         statusBadge.title = "Tersambung ke Google Sheets Database Cloud";
                     } else {
                         throw new Error(data.message || "Gagal mengambil data");
@@ -968,10 +906,8 @@
                 })
                 .catch(err => {
                     console.error("Gagal sinkronisasi data cloud Sheets:", err);
-                    showToast("Koneksi cloud gagal. Menggunakan draf draf lokal.", "error");
-                    appState.db = JSON.parse(JSON.stringify(mockDatabase));
-                    renderAllDynamicComponents();
-                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-red-500";
+                    showToast("Koneksi database error.", "error");
+                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-red-500 shrink-0";
                     statusBadge.title = "Koneksi Google Sheets Error: " + err.message;
                 })
                 .finally(() => {
@@ -997,17 +933,22 @@
             container.innerHTML = "";
             const todayClasses = appState.db.schedule.slice(0, 2); // Ambil 2 kegiatan teratas
 
-            countLabel.innerText = `${todayClasses.length} EVENT AKTIF`;
+            countLabel.innerText = `${todayClasses.length} KELAS AKTIF`;
 
             if (todayClasses.length === 0) {
-                container.innerHTML = `<p class="text-sm text-on-surface-variant italic">Tidak ada agenda kelas untuk hari ini.</p>`;
+                container.innerHTML = `
+                    <div class="text-center py-12 glass-card rounded-2xl">
+                        <span class="material-symbols-outlined text-3xl text-outline mb-2">event_busy</span>
+                        <p class="text-sm font-semibold text-on-surface dark:text-neutral-200">Tidak ada agenda kuliah hari ini</p>
+                        <p class="text-xs text-outline dark:text-neutral-400 mt-1">Gunakan tab Jadwal untuk memasukkan kelas baru.</p>
+                    </div>
+                `;
                 return;
             }
 
             todayClasses.forEach((cls, idx) => {
                 const colors = ["bg-primary", "bg-tertiary"];
                 const color = colors[idx % colors.length];
-                
                 const timeClean = cls.Time.split(" - ")[0]; // Ambil waktu jam mulai
                 
                 const card = document.createElement('div');
@@ -1053,10 +994,14 @@
                 cardsContainer.className = "space-y-4";
 
                 if (classesForDay.length === 0) {
-                    cardsContainer.innerHTML = `<p class="text-xs text-center text-on-surface-variant opacity-50 py-4">Kosong</p>`;
+                    cardsContainer.innerHTML = `
+                        <div class="p-4 border border-dashed border-outline-variant/50 dark:border-neutral-800 rounded-2xl text-center">
+                            <p class="text-xs text-on-surface-variant opacity-50 font-medium">Kosong</p>
+                        </div>
+                    `;
                 } else {
                     classesForDay.forEach(cls => {
-                        const isWednesday = day === "Wednesday"; // Tambahkan highlight khusus rabu sebagai kelas berjalan
+                        const isWednesday = day === "Wednesday";
                         const highlightClass = isWednesday 
                             ? "bg-primary/5 dark:bg-neutral-800/40 border-primary/20 dark:border-neutral-700 hover:border-primary hover:bg-primary/[0.08]" 
                             : "bg-white/50 dark:bg-neutral-900/40 border-neutral-200/60 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 hover:bg-white dark:hover:bg-neutral-900";
@@ -1103,7 +1048,17 @@
             listContainer.innerHTML = "";
             
             if (appState.db.notes.length === 0) {
-                listContainer.innerHTML = `<p class="text-xs text-on-surface-variant italic p-4">Catatan masih kosong.</p>`;
+                listContainer.innerHTML = `
+                    <div class="p-6 border border-dashed border-outline-variant/60 dark:border-neutral-800 rounded-2xl text-center">
+                        <p class="text-xs text-on-surface-variant opacity-60">Tidak ada draf catatan</p>
+                    </div>
+                `;
+                // Reset Editor form to generic default if clean
+                document.getElementById('editor-tag-week').innerText = "WEEK 1";
+                document.getElementById('editor-tag-course').innerText = "COURSE 101";
+                document.getElementById('editor-title').innerText = "Judul Catatan Baru";
+                document.getElementById('editor-subtitle').innerText = "Tuliskan ringkasan materi atau deskripsi sub-catatan di sini...";
+                document.getElementById('editor-content').innerText = "Mulai mengetik catatan Anda di sini...";
                 return;
             }
 
@@ -1141,7 +1096,7 @@
         function loadNoteToEditor(noteId) {
             appState.activeNoteId = noteId;
             renderNotebookModule();
-            showToast("Memuat catatan kulian...", "folder_open");
+            showToast("Memuat catatan kuliah...", "folder_open");
         }
 
         // Menyimpan catatan di editor saat ini ke server Sheets
@@ -1167,6 +1122,7 @@
                     appState.db.notes[idx] = updatedData;
                 } else {
                     appState.db.notes.push(updatedData);
+                    appState.activeNoteId = updatedData.id;
                 }
                 renderNotebookModule();
                 showToast("Draf catatan disimpan secara lokal!", "cloud_queue");
@@ -1175,7 +1131,7 @@
 
             fetch(APPS_SCRIPT_URL, {
                 method: "POST",
-                headers: { "Content-Type": "text/plain" }, // Gunakan text/plain menghindari CORS pre-flight block di GAS
+                headers: { "Content-Type": "text/plain" },
                 body: JSON.stringify({
                     action: "saveNote",
                     data: updatedData
@@ -1188,7 +1144,10 @@
                     // Update cache state
                     const idx = appState.db.notes.findIndex(n => n.ID === updatedData.id);
                     if (idx !== -1) appState.db.notes[idx] = updatedData;
-                    else appState.db.notes.push(updatedData);
+                    else {
+                        appState.db.notes.push(updatedData);
+                        appState.activeNoteId = updatedData.id;
+                    }
                     renderNotebookModule();
                 } else {
                     throw new Error(data.message);
@@ -1208,7 +1167,13 @@
             container.innerHTML = "";
 
             if (appState.db.assignments.length === 0) {
-                container.innerHTML = `<p class="text-sm italic text-on-surface-variant text-center py-8">Belum ada tugas.</p>`;
+                container.innerHTML = `
+                    <div class="text-center py-16 glass-card rounded-3xl">
+                        <span class="material-symbols-outlined text-4xl text-outline mb-2">assignment_late</span>
+                        <p class="text-sm font-semibold text-on-surface dark:text-neutral-200">Belum ada tugas aktif</p>
+                        <p class="text-xs text-outline dark:text-neutral-400 mt-1">Masukkan list tugas baru Anda di atas.</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -1260,6 +1225,8 @@
 
             if (list.length === 0) {
                 container.innerHTML = `<p class="text-xs text-on-surface-variant italic py-2">Tidak ada agenda harian.</p>`;
+                document.getElementById('checklist-tracker-text').innerText = "0/0 Selesai";
+                document.getElementById('checklist-tracker-bar').style.width = "0%";
                 return;
             }
 
@@ -1587,7 +1554,7 @@
             updateChartThemes();
         }
 
-        // Sidebar Collapse Trigger logic
+        // Sidebar Collapse Trigger logic - MEMPERBAIKI BUG TUMPANG TINDIH ELEMEN (image_3ea91e.png)
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const main = document.getElementById('main-content');
@@ -1598,13 +1565,19 @@
                 sidebar.style.width = '16rem';
                 main.style.marginLeft = '16rem';
                 icon.innerText = 'first_page';
-                textElements.forEach(el => el.style.display = 'inline');
+                textElements.forEach(el => {
+                    el.style.display = 'inline';
+                    el.style.opacity = '1';
+                });
                 appState.isSidebarCollapsed = false;
             } else {
                 sidebar.style.width = '5rem';
                 main.style.marginLeft = '5rem';
                 icon.innerText = 'last_page';
-                textElements.forEach(el => el.style.display = 'none');
+                textElements.forEach(el => {
+                    el.style.display = 'none';
+                    el.style.opacity = '0';
+                });
                 appState.isSidebarCollapsed = true;
             }
         }
@@ -1673,29 +1646,39 @@
             progressCircle.style.strokeDashoffset = offset;
         }
 
-        // Live Realtime Clock Engine
+        // Live Realtime Clock Engine in Indonesian (Hari, Tanggal, dan Waktu Realtime)
         function runClockEngine() {
             const timeSpan = document.getElementById('live-time');
             const dateSpan = document.getElementById('live-date');
             
             const now = new Date();
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+            
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            
+            const dayName = days[now.getDay()];
+            const dateNum = now.getDate();
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
 
-            timeSpan.innerHTML = `${now.toLocaleTimeString('en-US', timeOptions)} • SEMESTER GANJIL`;
-            dateSpan.textContent = now.toLocaleDateString('id-ID', dateOptions);
+            timeSpan.innerHTML = `${hours}:${minutes}:${seconds} WIB • SEMESTER GANJIL`;
+            dateSpan.textContent = `${dayName}, ${dateNum} ${monthName} ${year}`;
         }
 
         // Greeting dynamic set
         function setDynamicGreeting() {
             const hour = new Date().getHours();
             const greetEl = document.getElementById('dashboard-greeting');
-            let text = "Selamat datang kembali, Julian";
+            let text = "Selamat datang kembali, Irwan";
 
-            if (hour < 11) text = "Selamat pagi, Julian";
-            else if (hour < 15) text = "Selamat siang, Julian";
-            else if (hour < 18) text = "Selamat sore, Julian";
-            else text = "Selamat malam, Julian";
+            if (hour < 11) text = "Selamat pagi, Irwan";
+            else if (hour < 15) text = "Selamat siang, Irwan";
+            else if (hour < 18) text = "Selamat sore, Irwan";
+            else text = "Selamat malam, Irwan";
 
             greetEl.innerText = text;
         }
@@ -1765,7 +1748,7 @@
                     labels: ['S', 'S', 'R', 'K', 'J', 'S', 'M'],
                     datasets: [{
                         label: 'Jam Belajar',
-                        data: [4.2, 5.8, 3.1, 6.2, 7.8, 2.3, 3.0],
+                        data: [0, 0, 0, 0, 0, 0, 0],
                         backgroundColor: '#5d5f5f',
                         borderRadius: 6,
                         borderSkipped: false,
@@ -1789,7 +1772,7 @@
                 data: {
                     labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
                     datasets: [{
-                        data: [620, 840, 520, 710, 920, 410, 580],
+                        data: [0, 0, 0, 0, 0, 0, 0],
                         borderColor: '#5a614f',
                         borderWidth: 3,
                         tension: 0.4,
@@ -1816,7 +1799,7 @@
                 data: {
                     labels: ['Tenang', 'Terinspirasi', 'Melamun'],
                     datasets: [{
-                        data: [45, 25, 30],
+                        data: [0, 0, 0],
                         backgroundColor: ['#5e604f', '#dee5cf', '#444748'],
                         borderWidth: 3,
                         borderColor: '#fcf9f8'
@@ -1841,10 +1824,10 @@
 
         // Toggle custom reflective dataset
         function updateReflectiveGraph(range) {
-            showToast(`Loading study consistency records for: ${range}`);
+            showToast(`Memperbarui tren belajar: ${range}`);
             const dataSets = {
-                '7D': [620, 840, 520, 710, 920, 410, 580],
-                '1M': [720, 680, 890, 940, 610, 740, 830]
+                '7D': [0, 0, 0, 0, 0, 0, 0],
+                '1M': [0, 0, 0, 0, 0, 0, 0]
             };
             reflectiveChartInstance.data.datasets[0].data = dataSets[range] || dataSets['7D'];
             reflectiveChartInstance.update();
