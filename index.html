@@ -5,19 +5,19 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Academic OS - Premium Unified Workspace</title>
     
-    <!-- Tailwind CSS with Official Plugins -->
+    <!-- Tailwind CSS dengan Official Plugins -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     
     <!-- Google Fonts: Hanken Grotesk (Modern Sans) & Source Serif 4 (Elegant Editorial) -->
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet"/>
     
-    <!-- Google Material Symbols for Minimal Icons -->
+    <!-- Google Material Symbols untuk Ikon Minimalis -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <!-- GSAP for Smooth 60fps Page Transitions -->
+    <!-- GSAP untuk Animasi Transisi Halaman 60fps -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
-    <!-- Chart.js for Premium Interactive Analytics -->
+    <!-- Chart.js untuk Grafik Interaktif Premium -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
@@ -35,9 +35,9 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .dark .glass-card {
-            background: rgba(30, 30, 30, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .dark .glass-card, .dark .glass-card {
+            background: rgba(26, 28, 28, 0.8) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
         }
 
         /* Ambient Glowing Accents */
@@ -70,9 +70,9 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
         
-        body.dark {
-            background-color: #121212;
-            color: #f3f0f0;
+        body.dark, .dark body {
+            background-color: #121212 !important;
+            color: #f3f0f0 !important;
         }
 
         .heading-font {
@@ -114,6 +114,17 @@
         /* Premium Floating Navigation Transition Indicator */
         .nav-indicator {
             transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Spin Perfect (Anti-Wobble) untuk Tombol Refresh */
+        @keyframes spin-perfect {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin-perfect {
+            animation: spin-perfect 0.8s linear infinite;
+            transform-origin: center center;
+            display: inline-block !important;
         }
     </style>
 
@@ -207,9 +218,9 @@
                     <span class="nav-text whitespace-nowrap">Academic OS</span>
                 </h1>
                 <p class="heading-font text-xs text-on-surface-variant dark:text-neutral-400 opacity-70 tracking-wide font-semibold flex items-center gap-1.5 mt-1">
-                    <span class="nav-text whitespace-nowrap">Fall Semester 2024</span>
+                    <span class="nav-text whitespace-nowrap">Semester Ganjil 2024</span>
                     <!-- Status Database Connection Badge -->
-                    <span id="db-status-badge" class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 shrink-0" title="Memeriksa status database..."></span>
+                    <span id="db-status-badge" class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 shrink-0 mb-[1px]" title="Memeriksa status database..."></span>
                 </p>
             </div>
             <!-- Minimal Collapse Trigger (Desktop & Tablet) -->
@@ -238,6 +249,11 @@
             <button onclick="switchPage('notebook')" data-nav="notebook" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
                 <span class="material-symbols-outlined group-hover:scale-110" data-icon="menu_book">menu_book</span>
                 <span class="nav-text">Catatan</span>
+                <div class="nav-indicator ml-auto w-1.5 h-1.5 rounded-full bg-primary dark:bg-neutral-400 opacity-0"></div>
+            </button>
+            <button onclick="switchPage('exams')" data-nav="exams" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
+                <span class="material-symbols-outlined group-hover:scale-110" data-icon="event_note">event_note</span>
+                <span class="nav-text">Jadwal Ujian</span>
                 <div class="nav-indicator ml-auto w-1.5 h-1.5 rounded-full bg-primary dark:bg-neutral-400 opacity-0"></div>
             </button>
             <button onclick="switchPage('analytics')" data-nav="analytics" class="w-full flex items-center gap-3 py-3 px-4 rounded-xl heading-font text-sm font-semibold transition-all duration-200 text-left text-on-surface hover:bg-surface-container-low dark:text-neutral-200 dark:hover:bg-neutral-800 group">
@@ -269,7 +285,7 @@
             <div class="flex items-center gap-4 md:gap-8">
                 <!-- Advanced Global Live Filtering -->
                 <div class="relative hidden sm:block">
-                    <input id="global-search" oninput="handleGlobalSearch(this.value)" class="w-48 lg:w-64 pl-10 pr-4 py-2 rounded-full border-none bg-surface-container-low dark:bg-neutral-800 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary dark:focus:ring-neutral-500 heading-font text-xs" placeholder="Cari di workspace..." type="text"/>
+                    <input id="global-search" oninput="handleGlobalSearch(this.value)" class="w-48 lg:w-64 pl-10 pr-4 py-2 rounded-full border-none bg-surface-container-low dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary dark:focus:ring-neutral-500 heading-font text-xs" placeholder="Cari di workspace..." type="text"/>
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant dark:text-neutral-400 scale-90" data-icon="search">search</span>
                 </div>
 
@@ -279,9 +295,9 @@
                         <span class="material-symbols-outlined">sync</span>
                     </button>
                     <!-- Notifications -->
-                    <button onclick="showToast('Sistem notifikasi dalam keadaan siaga.', 'notifications')" class="p-2 hover:bg-surface-container-high dark:hover:bg-neutral-800 rounded-full transition-all text-on-surface-variant dark:text-neutral-400 relative">
+                    <button onclick="toggleNotificationsPanel()" class="p-2 hover:bg-surface-container-high dark:hover:bg-neutral-800 rounded-full transition-all text-on-surface-variant dark:text-neutral-400 relative">
                         <span class="material-symbols-outlined">notifications</span>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full animate-pulse"></span>
+                        <span id="notif-pulse" class="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full animate-pulse hidden"></span>
                     </button>
                     <!-- Dark/Light Mode Switcher -->
                     <button onclick="toggleTheme()" class="p-2 hover:bg-surface-container-high dark:hover:bg-neutral-800 rounded-full transition-all text-on-surface-variant dark:text-neutral-400">
@@ -296,11 +312,19 @@
                         <div class="w-10 h-10 rounded-full bg-tertiary-container overflow-hidden border border-outline-variant dark:border-neutral-800 shadow-sm">
                             <img class="w-full h-full object-cover" alt="Student Profile Picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBcFSAHjjq6fi5i3iberZu5aQPP2aP_ZVRiLWeGEZE3Ai7bmzwufMm1zfv38aHJThVSK9gDlOYlISeqCUGR1TeQyV9gvkqI4T9XCNKW8hJGwSu2--e0Lv6PAZ-Nb28FZUIY3mfa1zp822alOSqNQQ-GxSzMqFTR8W00xFXDl5ihmoHaMdyJYVzJ0UX810cJDhTGSSWeoxNcYueo3JSDqo-GEXDRlWNSj_ZVupUHUyP-FtTeQz8PhNBN9h4Bpf_qvLDVjlrO9sKQLpA"/>
                         </div>
-                        <span class="heading-font font-bold text-sm hidden lg:block text-on-surface dark:text-neutral-200">Irwan S.</span>
+                        <span class="heading-font font-bold text-sm hidden lg:block text-neutral-800 dark:text-neutral-200">Irwan S.</span>
                     </div>
                 </div>
             </div>
         </header>
+
+        <!-- Dropdown Notifikasi Panel -->
+        <div id="notif-panel" class="fixed top-16 right-16 w-80 glass-card rounded-2xl shadow-xl p-5 z-50 hidden max-h-96 overflow-y-auto border border-outline-variant dark:border-neutral-800">
+            <h4 class="heading-font text-sm font-bold text-neutral-800 dark:text-neutral-200 mb-3 border-b border-neutral-100 dark:border-neutral-800 pb-2">Pemberitahuan Sistem</h4>
+            <div id="notif-panel-content" class="space-y-3">
+                <!-- Diisi otomatis via JavaScript -->
+            </div>
+        </div>
 
         <!-- PAGE 1: DASHBOARD VIEW -->
         <section id="view-dashboard" class="page-view px-6 md:px-12 py-12 space-y-12">
@@ -342,35 +366,60 @@
                     </div>
                 </div>
 
-                <!-- Modern Weather Widget (M3 Style) -->
+                <!-- Modern Eisenhower Matrix (Matriks Prioritas) Widget -->
                 <div class="lg:col-span-4 p-8 rounded-3xl bg-secondary-container dark:bg-neutral-900 text-on-secondary-fixed flex flex-col justify-between min-h-[400px] border border-outline-variant dark:border-neutral-800 relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/20 dark:bg-neutral-800/40 rounded-full blur-2xl"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-between items-center mb-10">
-                            <span class="heading-font text-xs font-bold tracking-[0.2em] dark:text-neutral-300">CAMBRIDGE, MA</span>
-                            <span class="material-symbols-outlined dark:text-neutral-300" data-icon="cloud">cloud</span>
+                    <div class="relative z-10 space-y-4 h-full flex flex-col justify-between">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="heading-font text-xs font-bold tracking-[0.2em] dark:text-neutral-300">MATRIKS PRIORITAS</span>
+                            <span class="material-symbols-outlined dark:text-neutral-300" data-icon="grid_view">grid_view</span>
                         </div>
-                        <div class="space-y-1">
-                            <p class="text-6xl font-extrabold heading-font dark:text-white">54°F</p>
-                            <p class="heading-font text-lg font-semibold dark:text-neutral-300 opacity-90">Berawan Sebagian</p>
-                        </div>
-                    </div>
-                    
-                    <div class="relative z-10 flex gap-4 overflow-x-auto pb-2">
-                        <div class="min-w-[60px] text-center space-y-1.5 p-2 bg-white/25 dark:bg-neutral-800/50 rounded-xl">
-                            <p class="heading-font text-[10px] font-bold dark:text-neutral-300">12 PM</p>
-                            <span class="material-symbols-outlined text-lg dark:text-neutral-200" data-icon="sunny">sunny</span>
-                            <p class="heading-font text-xs font-semibold dark:text-neutral-200">56°</p>
-                        </div>
-                        <div class="min-w-[60px] text-center space-y-1.5 p-2 bg-white/25 dark:bg-neutral-800/50 rounded-xl">
-                            <p class="heading-font text-[10px] font-bold dark:text-neutral-300">1 PM</p>
-                            <span class="material-symbols-outlined text-lg dark:text-neutral-200" data-icon="partly_cloudy_day">partly_cloudy_day</span>
-                            <p class="heading-font text-xs font-semibold dark:text-neutral-200">58°</p>
-                        </div>
-                        <div class="min-w-[60px] text-center space-y-1.5 p-2 bg-white/25 dark:bg-neutral-800/50 rounded-xl">
-                            <p class="heading-font text-[10px] font-bold dark:text-neutral-300">2 PM</p>
-                            <span class="material-symbols-outlined text-lg dark:text-neutral-200" data-icon="cloud">cloud</span>
-                            <p class="heading-font text-xs font-semibold dark:text-neutral-200">55°</p>
+                        
+                        <div class="grid grid-cols-2 gap-3 h-full">
+                            <!-- Q1 -->
+                            <div class="p-3.5 rounded-2xl bg-red-100/40 dark:bg-red-950/20 border border-red-200/40 dark:border-red-900/30 flex flex-col justify-between">
+                                <div>
+                                    <h5 class="heading-font text-[10px] font-bold text-red-800 dark:text-red-300 uppercase tracking-wider">Q1: Mendesak</h5>
+                                    <p class="text-[11px] text-red-900/70 dark:text-red-400/80 mt-1 leading-snug">Kerjakan</p>
+                                </div>
+                                <div class="text-[9px] font-bold text-red-700 dark:text-red-400 mt-2 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">alarm</span>
+                                    <span>Tugas Aktif</span>
+                                </div>
+                            </div>
+                            <!-- Q2 -->
+                            <div class="p-3.5 rounded-2xl bg-tertiary-container/30 dark:bg-neutral-800/40 border border-tertiary/10 dark:border-neutral-700/30 flex flex-col justify-between">
+                                <div>
+                                    <h5 class="heading-font text-[10px] font-bold text-tertiary dark:text-neutral-300 uppercase tracking-wider">Q2: Rencanakan</h5>
+                                    <p class="text-[11px] text-on-tertiary-container/70 dark:text-neutral-400 mt-1 leading-snug">Jadwalkan</p>
+                                </div>
+                                <div class="text-[9px] font-bold text-tertiary dark:text-neutral-400 mt-2 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">calendar_today</span>
+                                    <span>Review Teori</span>
+                                </div>
+                            </div>
+                            <!-- Q3 -->
+                            <div class="p-3.5 rounded-2xl bg-amber-100/30 dark:bg-amber-950/10 border border-amber-200/30 dark:border-amber-900/20 flex flex-col justify-between">
+                                <div>
+                                    <h5 class="heading-font text-[10px] font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">Q3: Delegasikan</h5>
+                                    <p class="text-[11px] text-amber-900/70 dark:text-amber-400/80 mt-1 leading-snug">Kurangi</p>
+                                </div>
+                                <div class="text-[9px] font-bold text-amber-700 dark:text-amber-400 mt-2 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">person</span>
+                                    <span>Admin Organisasi</span>
+                                </div>
+                            </div>
+                            <!-- Q4 -->
+                            <div class="p-3.5 rounded-2xl bg-neutral-100/40 dark:bg-neutral-800/20 border border-neutral-200/40 dark:border-neutral-700/20 flex flex-col justify-between">
+                                <div>
+                                    <h5 class="heading-font text-[10px] font-bold text-outline dark:text-neutral-400 uppercase tracking-wider">Q4: Tunda</h5>
+                                    <p class="text-[11px] text-on-surface-variant/70 dark:text-neutral-400 mt-1 leading-snug">Eliminasi</p>
+                                </div>
+                                <div class="text-[9px] font-bold text-outline dark:text-neutral-400 mt-2 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">delete</span>
+                                    <span>Sosmed Berlebih</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -391,12 +440,12 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div class="p-4 bg-surface-container-low dark:bg-neutral-900 rounded-2xl border border-neutral-100 dark:border-neutral-800">
                             <p class="heading-font text-[10px] text-outline dark:text-neutral-400 font-extrabold tracking-wider uppercase">TOTAL MINGGUAN</p>
-                            <p class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1">32.4j</p>
+                            <p id="total-study-hours-text" class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1">0j</p>
                         </div>
                         <div class="p-4 bg-surface-container-low dark:bg-neutral-900 rounded-2xl border border-neutral-100 dark:border-neutral-800">
                             <p class="heading-font text-[10px] text-outline dark:text-neutral-400 font-extrabold tracking-wider uppercase">RATA-RATA HARIAN</p>
-                            <p class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1 flex items-center gap-1">
-                                4.6j
+                            <p id="avg-study-hours-text" class="text-3xl font-extrabold heading-font text-primary dark:text-neutral-200 mt-1 flex items-center gap-1">
+                                0j
                                 <span class="material-symbols-outlined text-amber-500 fill-1" style="font-variation-settings: 'FILL' 1">schedule</span>
                             </p>
                         </div>
@@ -406,27 +455,8 @@
                 <!-- Live Progress Tracking -->
                 <div class="lg:col-span-7 p-8 rounded-3xl bg-white dark:bg-neutral-950 border border-outline-variant dark:border-neutral-800 space-y-6">
                     <h4 class="heading-font text-xl font-bold text-on-surface dark:text-neutral-100">Progres Capaian Akademik</h4>
-                    <div class="space-y-6">
-                        <!-- Progress 1 -->
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="heading-font font-semibold text-on-surface dark:text-neutral-200">Thesis Research & Outline</span>
-                                <span class="heading-font font-bold text-primary dark:text-neutral-400">65%</span>
-                            </div>
-                            <div class="w-full h-3 bg-surface-container dark:bg-neutral-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-primary dark:bg-neutral-400 w-[65%] rounded-full transition-all duration-1000 glow-accent-primary"></div>
-                            </div>
-                        </div>
-                        <!-- Progress 2 -->
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center text-sm">
-                                <span class="heading-font font-semibold text-on-surface dark:text-neutral-200">Applied Econometrics Lab</span>
-                                <span class="heading-font font-bold text-primary dark:text-neutral-400">82%</span>
-                            </div>
-                            <div class="w-full h-3 bg-surface-container dark:bg-neutral-800 rounded-full overflow-hidden">
-                                <div class="h-full bg-tertiary dark:bg-neutral-500 w-[82%] rounded-full transition-all duration-1000"></div>
-                            </div>
-                        </div>
+                    <div id="progress-container" class="space-y-6">
+                        <!-- Progress dimuat secara dinamis dari database list tugas -->
                     </div>
 
                     <div class="grid grid-cols-3 gap-4 pt-4 border-t border-outline-variant dark:border-neutral-800">
@@ -436,7 +466,7 @@
                         </div>
                         <div class="text-center p-4 rounded-2xl bg-primary-container dark:bg-neutral-900">
                             <span class="material-symbols-outlined text-primary dark:text-neutral-300" style="font-variation-settings: 'FILL' 1" data-icon="task_alt">task_alt</span>
-                            <p id="dashboard-tasks-completed-text" class="heading-font text-[10px] font-bold text-on-surface dark:text-neutral-300 mt-2">48 TUGAS SELESAI</p>
+                            <p id="dashboard-tasks-completed-text" class="heading-font text-[10px] font-bold text-on-surface dark:text-neutral-300 mt-2">0 TUGAS SELESAI</p>
                         </div>
                         <div class="text-center p-4 rounded-2xl bg-surface-container dark:bg-neutral-900">
                             <span class="material-symbols-outlined text-on-surface-variant dark:text-neutral-300" style="font-variation-settings: 'FILL' 1" data-icon="grade">grade</span>
@@ -593,22 +623,22 @@
                     </div>
                     <div>
                         <span class="heading-font text-[10px] font-bold tracking-[0.25em] text-neutral-400 block mb-2 uppercase">Ujian Utama Berikutnya</span>
-                        <h4 class="heading-font text-2xl font-bold">Advanced Microeconomics Final</h4>
+                        <h4 class="heading-font text-2xl font-bold">Belum Ada Jadwal Ujian Terdekat</h4>
                     </div>
                     
                     <div class="flex gap-4 mt-8" id="exam-countdown">
                         <div class="text-center">
-                            <span id="pomo-days" class="block text-3xl font-extrabold heading-font">08</span>
+                            <span id="pomo-days" class="block text-3xl font-extrabold heading-font">00</span>
                             <span class="text-[9px] uppercase tracking-widest text-neutral-400 font-bold">Hari</span>
                         </div>
                         <div class="text-xl font-light opacity-30 mt-1">:</div>
                         <div class="text-center">
-                            <span id="pomo-hours" class="block text-3xl font-extrabold heading-font">14</span>
+                            <span id="pomo-hours" class="block text-3xl font-extrabold heading-font">00</span>
                             <span class="text-[9px] uppercase tracking-widest text-neutral-400 font-bold">Jam</span>
                         </div>
                         <div class="text-xl font-light opacity-30 mt-1">:</div>
                         <div class="text-center">
-                            <span id="pomo-mins" class="block text-3xl font-extrabold heading-font">32</span>
+                            <span id="pomo-mins" class="block text-3xl font-extrabold heading-font">00</span>
                             <span class="text-[9px] uppercase tracking-widest text-neutral-400 font-bold">Menit</span>
                         </div>
                     </div>
@@ -655,7 +685,59 @@
             </div>
         </section>
 
-        <!-- PAGE 5: ANALYTICS / STATISTICS & INSIGHTS -->
+        <!-- PAGE 5: JADWAL UJIAN VIEW (NEW INPUT FORM & LIST PAGE) -->
+        <section id="view-exams" class="page-view px-6 md:px-12 py-12 space-y-12">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
+                <div>
+                    <h3 class="heading-font text-4xl font-extrabold tracking-tight dark:text-white">Jadwal Ujian</h3>
+                    <p class="text-lg text-on-surface-variant dark:text-neutral-400 opacity-80">Catat dan pantau seluruh agenda ujian dan penilaian mendatang.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Input Form -->
+                <div class="lg:col-span-4 p-8 rounded-3xl bg-white dark:bg-neutral-950 border border-outline-variant dark:border-neutral-800 space-y-6 shadow-xs">
+                    <h4 class="heading-font text-xl font-bold dark:text-white">Tambah Jadwal Ujian</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-outline dark:text-neutral-400 mb-1">Mata Kuliah</label>
+                            <input id="exam-input-course" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3.5 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary" placeholder="Contoh: Makroekonomi Lanjutan"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-outline dark:text-neutral-400 mb-1">Tanggal Ujian</label>
+                            <input id="exam-input-date" type="date" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3.5 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-outline dark:text-neutral-400 mb-1">Waktu Ujian</label>
+                            <input id="exam-input-time" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3.5 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary" placeholder="Contoh: 08:00 - 10:00 WIB"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-outline dark:text-neutral-400 mb-1">Ruangan / Tempat</label>
+                            <input id="exam-input-room" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3.5 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary" placeholder="Contoh: Ruang A.302"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-outline dark:text-neutral-400 mb-1">Sifat Ujian</label>
+                            <select id="exam-input-type" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3.5 text-on-surface dark:text-neutral-200 focus:ring-1 focus:ring-primary">
+                                <option value="Buka Buku">Buka Buku (Open Book)</option>
+                                <option value="Tutup Buku">Tutup Buku (Closed Book)</option>
+                                <option value="Take Home">Take Home Project</option>
+                            </select>
+                        </div>
+                        <button onclick="submitExamSchedule()" class="w-full py-3.5 bg-primary dark:bg-neutral-800 text-white rounded-xl heading-font text-xs font-bold tracking-wider uppercase interactive-btn shadow-sm">Simpan Ujian</button>
+                    </div>
+                </div>
+
+                <!-- Database List Display -->
+                <div class="lg:col-span-8 space-y-6">
+                    <h4 class="heading-font text-xl font-bold dark:text-white">Daftar Jadwal Ujian Aktif</h4>
+                    <div id="exams-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Dimuat secara dinamis -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: ANALYTICS / STATISTICS & INSIGHTS -->
         <section id="view-analytics" class="page-view px-6 md:px-12 py-12 space-y-12">
             <!-- Grid Stats Hero Row -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -663,7 +745,7 @@
                 <div class="bg-surface-container-low dark:bg-neutral-900 border border-outline-variant dark:border-neutral-800 p-8 rounded-3xl flex flex-col justify-between">
                     <div class="space-y-1">
                         <span class="heading-font text-xs font-extrabold text-outline dark:text-neutral-400 uppercase tracking-widest">Total Jurnal</span>
-                        <h2 class="heading-font text-4xl font-extrabold dark:text-white">0 Entry Logs</h2>
+                        <h2 id="analytics-total-notes" class="heading-font text-4xl font-extrabold dark:text-white">0 Catatan</h2>
                     </div>
                     <div class="flex items-center gap-1 mt-6 text-green-600 dark:text-green-400 heading-font text-xs font-bold">
                         <span class="material-symbols-outlined text-sm">trending_up</span>
@@ -777,25 +859,25 @@
             <h3 class="heading-font text-2xl font-extrabold dark:text-white">Tambah Jadwal Kuliah</h3>
             
             <div class="space-y-4">
-                <input id="course-title" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm font-bold p-3" placeholder="Nama Mata Kuliah..."/>
-                <input id="course-instructor" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Dosen Pengampu..."/>
+                <input id="course-title" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm font-bold p-3 text-on-surface dark:text-neutral-200" placeholder="Nama Mata Kuliah..."/>
+                <input id="course-instructor" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200" placeholder="Dosen Pengampu..."/>
                 <div class="grid grid-cols-2 gap-4">
-                    <select id="course-day" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3">
+                    <select id="course-day" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200">
                         <option value="Monday">Senin</option>
                         <option value="Tuesday">Selasa</option>
                         <option value="Wednesday">Rabu</option>
                         <option value="Thursday">Kamis</option>
                         <option value="Friday">Jumat</option>
                     </select>
-                    <input id="course-time" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Waktu (e.g. 09:00 - 10:30)"/>
+                    <input id="course-time" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200" placeholder="Waktu (e.g. 09:00 - 10:30)"/>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <input id="course-location" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Ruangan/Lokasi"/>
-                    <select id="course-type" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3">
-                        <option value="Core Course">Core Course</option>
-                        <option value="Science">Science</option>
-                        <option value="Active Seminar">Active Seminar</option>
-                        <option value="Elective">Elective</option>
+                    <input id="course-location" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200" placeholder="Ruangan/Lokasi"/>
+                    <select id="course-type" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200">
+                        <option value="Mata Kuliah Utama">Mata Kuliah Utama</option>
+                        <option value="Sains & Teknologi">Sains & Teknologi</option>
+                        <option value="Seminar / Workshop">Seminar / Workshop</option>
+                        <option value="Mata Kuliah Pilihan">Mata Kuliah Pilihan</option>
                     </select>
                 </div>
             </div>
@@ -815,19 +897,19 @@
             <h3 class="heading-font text-2xl font-extrabold dark:text-white">Tambah Tugas Baru</h3>
             
             <div class="space-y-4">
-                <input id="task-title" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm font-bold p-3" placeholder="Nama Tugas..."/>
-                <input id="task-course" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Mata Kuliah & Kode..."/>
+                <input id="task-title" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm font-bold p-3 text-on-surface dark:text-neutral-200" placeholder="Nama Tugas..."/>
+                <input id="task-course" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200" placeholder="Mata Kuliah & Kode..."/>
                 <div class="grid grid-cols-2 gap-4">
-                    <select id="task-priority" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3">
+                    <select id="task-priority" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200">
                         <option value="High Priority">Prioritas Tinggi</option>
                         <option value="Medium Priority">Prioritas Sedang</option>
                         <option value="Low Priority">Prioritas Rendah</option>
                     </select>
-                    <input id="task-duedate" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Tenggat (e.g. Due in 3 days)"/>
+                    <input id="task-duedate" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200" placeholder="Tenggat (e.g. Due in 3 days)"/>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <input id="task-est" type="number" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Estimasi Jam Belajar"/>
-                    <input id="task-percent" type="number" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3" placeholder="Progres Awal (e.g. 10)"/>
+                    <input id="task-est" type="number" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200" placeholder="Estimasi Jam Belajar"/>
+                    <input id="task-percent" type="number" class="w-full bg-surface-container-low dark:bg-neutral-900 border-none rounded-xl text-sm p-3 text-on-surface dark:text-neutral-200" placeholder="Progres Awal (e.g. 10)"/>
                 </div>
             </div>
 
@@ -841,11 +923,11 @@
     <!-- MAIN INTERACTIVE STATE ENGINE & ALGORITHMS -->
     <script>
         // =========================================================================
-        // CONFIGURATION: Ganti dengan URL Web App Google Apps Script Anda setelah di-deploy
+        // CONFIGURATION: URL Web App Google Apps Script Aktif
         // =========================================================================
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwAiaXQ9uXAwUEeiuaiOiahC9KL1-z2i0vqBRexwmZ0D1SQMBehR7NOrxi_VaUDaZirWQ/exec"; 
 
-        // Global State Repository
+        // Global State Repository (Mulai dari Kosong Sempurna)
         const appState = {
             currentTheme: 'light',
             currentPage: 'dashboard',
@@ -856,12 +938,12 @@
             totalFocusTasks: 0,
             completedFocusTasks: 0,
             activeNoteId: '',
-            // Local DB Cache (Initialized as EMPTY as requested)
             db: {
                 schedule: [],
                 assignments: [],
                 notes: [],
-                checklist: []
+                checklist: [],
+                exams: []
             }
         };
 
@@ -870,13 +952,17 @@
             const refreshBtn = document.getElementById('sync-refresh-btn');
             const statusBadge = document.getElementById('db-status-badge');
             
-            if (refreshBtn) refreshBtn.classList.add('animate-spin');
+            let refreshIcon = null;
+            if (refreshBtn) {
+                refreshIcon = refreshBtn.querySelector('.material-symbols-outlined');
+                if (refreshIcon) refreshIcon.classList.add('animate-spin-perfect');
+            }
             
             if (!APPS_SCRIPT_URL) {
                 console.log("Academic OS berjalan dalam 'Kosong Mode' menunggu konfigurasi APPS_SCRIPT_URL.");
                 renderAllDynamicComponents();
                 
-                if (refreshBtn) refreshBtn.classList.remove('animate-spin');
+                if (refreshIcon) refreshIcon.classList.remove('animate-spin-perfect');
                 if (statusBadge) {
                     statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 shrink-0";
                     statusBadge.title = "Belum Terhubung Database (Menampilkan Data Kosong)";
@@ -884,7 +970,7 @@
                 return;
             }
 
-            statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shrink-0";
+            statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shrink-0 mb-[1px]";
             statusBadge.title = "Menghubungkan ke database Sheets...";
 
             fetch(`${APPS_SCRIPT_URL}?action=getData`)
@@ -895,10 +981,11 @@
                         appState.db.assignments = data.assignments || [];
                         appState.db.notes = data.notes || [];
                         appState.db.checklist = data.checklist || [];
+                        appState.db.exams = data.exams || [];
 
                         renderAllDynamicComponents();
                         showToast("Koneksi database sinkron!", "cloud_done");
-                        statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-green-500 shrink-0";
+                        statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-green-500 shrink-0 mb-[1px]";
                         statusBadge.title = "Tersambung ke Google Sheets Database Cloud";
                     } else {
                         throw new Error(data.message || "Gagal mengambil data");
@@ -906,12 +993,13 @@
                 })
                 .catch(err => {
                     console.error("Gagal sinkronisasi data cloud Sheets:", err);
-                    showToast("Koneksi database error.", "error");
-                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-red-500 shrink-0";
+                    showToast("Koneksi cloud gagal. Menjalankan memori kosong.", "error");
+                    renderAllDynamicComponents();
+                    statusBadge.className = "inline-block w-2.5 h-2.5 rounded-full bg-red-500 shrink-0 mb-[1px]";
                     statusBadge.title = "Koneksi Google Sheets Error: " + err.message;
                 })
                 .finally(() => {
-                    if (refreshBtn) refreshBtn.classList.remove('animate-spin');
+                    if (refreshIcon) refreshIcon.classList.remove('animate-spin-perfect');
                 });
         }
 
@@ -922,6 +1010,13 @@
             renderNotebookModule();
             renderAssignmentsPage();
             renderChecklist();
+            renderExamsList();
+            
+            // Perbarui indikator data belajar, progres kualitatif, dan countdown ujian
+            updateStudyMetrics();
+            renderProgressSection();
+            updateExamCountdown();
+            updateNotifications();
         }
 
         // 1. Dashboard Events renderer
@@ -937,7 +1032,7 @@
 
             if (todayClasses.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-12 glass-card rounded-2xl">
+                    <div class="text-center py-12 glass-card rounded-2xl dark:bg-neutral-900 border-neutral-200/50 dark:border-neutral-800">
                         <span class="material-symbols-outlined text-3xl text-outline mb-2">event_busy</span>
                         <p class="text-sm font-semibold text-on-surface dark:text-neutral-200">Tidak ada agenda kuliah hari ini</p>
                         <p class="text-xs text-outline dark:text-neutral-400 mt-1">Gunakan tab Jadwal untuk memasukkan kelas baru.</p>
@@ -1043,10 +1138,15 @@
         // 3. Render Notebook Side List
         function renderNotebookModule() {
             const listContainer = document.getElementById('notebook-list');
+            const totalNotesEl = document.getElementById('analytics-total-notes');
             if (!listContainer) return;
 
             listContainer.innerHTML = "";
             
+            if (totalNotesEl) {
+                totalNotesEl.innerText = `${appState.db.notes.length} Catatan`;
+            }
+
             if (appState.db.notes.length === 0) {
                 listContainer.innerHTML = `
                     <div class="p-6 border border-dashed border-outline-variant/60 dark:border-neutral-800 rounded-2xl text-center">
@@ -1155,29 +1255,34 @@
             })
             .catch(err => {
                 console.error("Gagal simpan catatan:", err);
-                showToast("Sinkronisasi gagal, tersimpan sebagai draf lokal.", "error");
+                showToast("Sinkronisasi gagal, draf lokal diperbarui.", "error");
             });
         }
 
         // 4. Render Tugas / Assignments Page
         function renderAssignmentsPage() {
             const container = document.getElementById('assignments-list-container');
+            const doneText = document.getElementById('dashboard-tasks-completed-text');
             if (!container) return;
 
             container.innerHTML = "";
 
             if (appState.db.assignments.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-16 glass-card rounded-3xl">
+                    <div class="text-center py-16 glass-card rounded-3xl dark:bg-neutral-900 border-neutral-200/50 dark:border-neutral-800">
                         <span class="material-symbols-outlined text-4xl text-outline mb-2">assignment_late</span>
                         <p class="text-sm font-semibold text-on-surface dark:text-neutral-200">Belum ada tugas aktif</p>
                         <p class="text-xs text-outline dark:text-neutral-400 mt-1">Masukkan list tugas baru Anda di atas.</p>
                     </div>
                 `;
+                if (doneText) doneText.innerText = "0 TUGAS SELESAI";
                 return;
             }
 
+            let completedCount = 0;
             appState.db.assignments.forEach(item => {
+                if (parseInt(item.Percentage) === 100) completedCount++;
+
                 const priorityClass = item.Priority === "High Priority" 
                     ? "bg-red-100 text-red-700 dark:bg-red-950/50 dark:text-red-300"
                     : "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300";
@@ -1212,6 +1317,8 @@
                 `;
                 container.appendChild(card);
             });
+
+            if (doneText) doneText.innerText = `${completedCount} TUGAS SELESAI`;
         }
 
         // 5. Render Checklist Harian (Daily Focus)
@@ -1302,128 +1409,313 @@
             });
         }
 
-        // Modal triggers: Add Course (Schedule)
-        function openAddCourseModal() {
-            const modal = document.getElementById('addCourseModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.add('opacity-100');
-                modal.querySelector('.transform').classList.remove('scale-95');
-            }, 50);
-        }
+        // 6. Merender list ujian dan countdown interaktif terhubung
+        function renderExamsList() {
+            const container = document.getElementById('exams-list-container');
+            if (!container) return;
 
-        function closeAddCourseModal() {
-            const modal = document.getElementById('addCourseModal');
-            modal.querySelector('.transform').classList.add('scale-95');
-            modal.classList.add('opacity-100');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        }
+            container.innerHTML = "";
 
-        // Submit New Course to Google Sheet Database
-        function submitNewCourse() {
-            const title = document.getElementById('course-title').value;
-            const instructor = document.getElementById('course-instructor').value;
-            const day = document.getElementById('course-day').value;
-            const time = document.getElementById('course-time').value;
-            const location = document.getElementById('course-location').value;
-            const type = document.getElementById('course-type').value;
-
-            if (!title || !time || !location) {
-                showToast("Form tidak boleh kosong!", "warning");
+            if (!appState.db.exams || appState.db.exams.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-2 text-center py-16 glass-card rounded-3xl dark:bg-neutral-900 border-neutral-200/50 dark:border-neutral-800">
+                        <span class="material-symbols-outlined text-4xl text-outline mb-2">event_busy</span>
+                        <p class="text-sm font-semibold text-on-surface dark:text-neutral-200">Belum ada jadwal ujian</p>
+                        <p class="text-xs text-outline dark:text-neutral-400 mt-1">Gunakan form di sebelah kiri untuk merekam jadwal ujian baru.</p>
+                    </div>
+                `;
                 return;
             }
 
-            const item = { day, title, instructor, time, location, type };
+            appState.db.exams.forEach(exam => {
+                const card = document.createElement('div');
+                card.className = "glass-card p-6 rounded-3xl relative group border border-outline-variant dark:border-neutral-800 space-y-4 hover:scale-[1.01] transition-all shadow-xs";
+                
+                card.innerHTML = `
+                    <button onclick="deleteExamSchedule('${exam.ID}')" class="absolute top-4 right-4 p-1.5 rounded-full hover:bg-red-50 dark:hover:bg-neutral-800 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity" title="Hapus Jadwal Ujian">
+                        <span class="material-symbols-outlined text-sm">delete</span>
+                    </button>
+                    <div class="flex justify-between items-start flex-wrap gap-2">
+                        <span class="bg-primary/10 dark:bg-neutral-800 text-primary dark:text-neutral-300 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-lg">${exam.Type}</span>
+                        <span class="heading-font text-[10px] text-outline dark:text-neutral-400">${exam.Time}</span>
+                    </div>
+                    <h4 class="heading-font font-bold text-base dark:text-white">${exam.Course}</h4>
+                    <div class="flex items-center justify-between text-xs text-outline dark:text-neutral-400 pt-2 border-t border-dashed border-neutral-200/60 dark:border-neutral-800">
+                        <div class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">calendar_month</span>
+                            <span class="heading-font text-[10px] font-bold">${exam.Date}</span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">location_on</span>
+                            <span class="heading-font text-[10px] font-bold">${exam.Location}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-            showToast("Menyimpan kelas baru...", "sync");
+        // Simpan Jadwal Ujian Baru
+        function submitExamSchedule() {
+            const course = document.getElementById('exam-input-course').value;
+            const date = document.getElementById('exam-input-date').value;
+            const time = document.getElementById('exam-input-time').value;
+            const room = document.getElementById('exam-input-room').value;
+            const type = document.getElementById('exam-input-type').value;
+
+            if (!course || !date || !time || !room) {
+                showToast("Semua kolom form wajib diisi!", "warning");
+                return;
+            }
+
+            const item = {
+                ID: "exam_" + new Date().getTime(),
+                Course: course,
+                Date: date,
+                Time: time,
+                Location: room,
+                Type: type
+            };
+
+            showToast("Menyimpan jadwal ujian...", "sync");
 
             if (!APPS_SCRIPT_URL) {
-                item.ID = "course_" + new Date().getTime();
-                appState.db.schedule.push(item);
+                if (!appState.db.exams) appState.db.exams = [];
+                appState.db.exams.push(item);
                 renderAllDynamicComponents();
-                closeAddCourseModal();
-                showToast("Mata kuliah baru disimpan lokal!", "cloud_queue");
+                showToast("Jadwal ujian disimpan secara lokal!", "cloud_queue");
+                
+                // Clear inputs
+                document.getElementById('exam-input-course').value = '';
+                document.getElementById('exam-input-date').value = '';
+                document.getElementById('exam-input-time').value = '';
+                document.getElementById('exam-input-room').value = '';
                 return;
             }
 
+            // POST ke database Google Sheets
             fetch(APPS_SCRIPT_URL, {
                 method: "POST",
                 headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify({ action: "addCourse", data: item })
+                body: JSON.stringify({ action: "addExam", data: item })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
                     item.ID = data.id;
-                    appState.db.schedule.push(item);
+                    if (!appState.db.exams) appState.db.exams = [];
+                    appState.db.exams.push(item);
                     renderAllDynamicComponents();
-                    closeAddCourseModal();
                     showToast(data.message, "cloud_done");
+                    
+                    // Clear inputs
+                    document.getElementById('exam-input-course').value = '';
+                    document.getElementById('exam-input-date').value = '';
+                    document.getElementById('exam-input-time').value = '';
+                    document.getElementById('exam-input-room').value = '';
                 }
             })
-            .catch(err => showToast("Gagal menyimpan ke cloud.", "error"));
+            .catch(() => showToast("Gagal menyimpan ke cloud.", "error"));
         }
 
-        // Modal triggers: Add Assignment
-        function openAddAssignmentModal() {
-            const modal = document.getElementById('addAssignmentModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.add('opacity-100');
-                modal.querySelector('.transform').classList.remove('scale-95');
-            }, 50);
+        // Hapus jadwal ujian terdaftar
+        function deleteExamSchedule(id) {
+            appState.db.exams = appState.db.exams.filter(e => e.ID !== id);
+            renderAllDynamicComponents();
+            showToast("Jadwal ujian berhasil dihapus.", "delete");
         }
 
-        function closeAddAssignmentModal() {
-            const modal = document.getElementById('addAssignmentModal');
-            modal.querySelector('.transform').classList.add('scale-95');
-            modal.classList.add('opacity-100');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        }
+        // Update real-time countdown ujian terdekat
+        function updateExamCountdown() {
+            const daysEl = document.getElementById('pomo-days');
+            const hoursEl = document.getElementById('pomo-hours');
+            const minsEl = document.getElementById('pomo-mins');
+            const examTitleEl = document.querySelector('#view-assignments h4');
 
-        // Submit New Assignment data
-        function submitNewAssignment() {
-            const title = document.getElementById('task-title').value;
-            const course = document.getElementById('task-course').value;
-            const priority = document.getElementById('task-priority').value;
-            const dueDate = document.getElementById('task-duedate').value;
-            const estHours = document.getElementById('task-est').value || 1;
-            const percentage = document.getElementById('task-percent').value || 0;
+            if (!daysEl || !hoursEl || !minsEl) return;
 
-            if (!title || !course || !dueDate) {
-                showToast("Form wajib diisi!", "warning");
+            const now = new Date();
+            if (!appState.db.exams || appState.db.exams.length === 0) {
+                if (examTitleEl) examTitleEl.textContent = "Belum Ada Jadwal Ujian Terdekat";
+                daysEl.innerText = "00";
+                hoursEl.innerText = "00";
+                minsEl.innerText = "00";
                 return;
             }
 
-            const item = { priority, dueDate, title, course, percentage, estHours };
+            const futureExams = appState.db.exams.filter(exam => {
+                const examDate = new Date(exam.Date);
+                return examDate > now;
+            });
 
-            showToast("Menyimpan tugas...", "sync");
-
-            if (!APPS_SCRIPT_URL) {
-                item.ID = "task_" + new Date().getTime();
-                appState.db.assignments.push(item);
-                renderAllDynamicComponents();
-                closeAddAssignmentModal();
-                showToast("Tugas baru disimpan lokal!", "cloud_queue");
+            if (futureExams.length === 0) {
+                if (examTitleEl) examTitleEl.textContent = "Belum Ada Jadwal Ujian Terdekat";
+                daysEl.innerText = "00";
+                hoursEl.innerText = "00";
+                minsEl.innerText = "00";
                 return;
             }
 
-            fetch(APPS_SCRIPT_URL, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify({ action: "addAssignment", data: item })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    item.ID = data.id;
-                    appState.db.assignments.push(item);
-                    renderAllDynamicComponents();
-                    closeAddAssignmentModal();
-                    showToast(data.message, "cloud_done");
+            // Urutkan untuk mendapatkan ujian paling dekat
+            futureExams.sort((a, b) => new Date(a.Date) - new Date(b.Date));
+            const closestExam = futureExams[0];
+
+            if (examTitleEl) examTitleEl.textContent = closestExam.Course;
+
+            const targetDate = new Date(closestExam.Date);
+            const diffMs = targetDate - now;
+
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+            daysEl.innerText = days.toString().padStart(2, '0');
+            hoursEl.innerText = hours.toString().padStart(2, '0');
+            minsEl.innerText = minutes.toString().padStart(2, '0');
+        }
+
+        // Render dinamis bagian Progres Capaian berdasarkan Tugas Aktif
+        function renderProgressSection() {
+            const container = document.getElementById('progress-container');
+            if (!container) return;
+
+            container.innerHTML = "";
+
+            const activeAssignments = appState.db.assignments;
+
+            if (activeAssignments.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10">
+                        <span class="material-symbols-outlined text-4xl text-outline mb-2 opacity-50">donut_large</span>
+                        <p class="text-xs font-semibold text-on-surface dark:text-neutral-200">Belum ada progres capaian akademik</p>
+                        <p class="text-[10px] text-outline dark:text-neutral-400 mt-1">Sistem mengambil progres otomatis dari Tugas Aktif yang Anda buat.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            activeAssignments.forEach(item => {
+                const percent = item.Percentage || 0;
+                const color = percent > 50 ? 'bg-primary' : 'bg-tertiary';
+                const card = document.createElement('div');
+                card.className = "space-y-2";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="heading-font font-semibold text-on-surface dark:text-neutral-200">${item.Title}</span>
+                        <span class="heading-font font-bold text-primary dark:text-neutral-400">${percent}%</span>
+                    </div>
+                    <div class="w-full h-3 bg-surface-container dark:bg-neutral-800 rounded-full overflow-hidden">
+                        <div class="h-full ${color} dark:bg-neutral-400 rounded-full transition-all duration-1000" style="width: ${percent}%"></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateStudyMetrics() {
+            const totalHoursEl = document.getElementById('total-study-hours-text');
+            const avgHoursEl = document.getElementById('avg-study-hours-text');
+            if (!totalHoursEl || !avgHoursEl) return;
+
+            // Hitung jam dari list tugas aktif
+            const totalHours = appState.db.assignments.reduce((sum, item) => sum + parseFloat(item.EstHours || 0), 0);
+            const avgHours = totalHours > 0 ? (totalHours / 7).toFixed(1) : 0;
+
+            totalHoursEl.innerText = `${totalHours}j`;
+            avgHoursEl.innerHTML = `
+                ${avgHours}j
+                <span class="material-symbols-outlined text-amber-500 fill-1" style="font-variation-settings: 'FILL' 1">schedule</span>
+            `;
+
+            // Atur statistik grafik mingguan secara proporsional sesuai target jam tugas
+            if (dashboardStudyChartInstance) {
+                const distributed = totalHours > 0 ? [
+                    (totalHours * 0.15).toFixed(1),
+                    (totalHours * 0.2).toFixed(1),
+                    (totalHours * 0.1).toFixed(1),
+                    (totalHours * 0.25).toFixed(1),
+                    (totalHours * 0.15).toFixed(1),
+                    (totalHours * 0.05).toFixed(1),
+                    (totalHours * 0.1).toFixed(1)
+                ] : [0, 0, 0, 0, 0, 0, 0];
+                
+                dashboardStudyChartInstance.data.datasets[0].data = distributed;
+                dashboardStudyChartInstance.update();
+            }
+        }
+
+        // Toggle dropdown notifikasi panel
+        function toggleNotificationsPanel() {
+            const panel = document.getElementById('notif-panel');
+            if (panel) {
+                panel.classList.toggle('hidden');
+            }
+        }
+
+        // Memperbarui isi notifikasi secara pintar & realtime
+        function updateNotifications() {
+            const content = document.getElementById('notif-panel-content');
+            const pulse = document.getElementById('notif-pulse');
+            if (!content) return;
+
+            content.innerHTML = "";
+            let alerts = [];
+
+            // 1. Cek tugas prioritas tinggi
+            appState.db.assignments.forEach(item => {
+                if (item.Priority === "High Priority" && parseInt(item.Percentage) < 100) {
+                    alerts.push({
+                        text: `Tugas Mendesak: "${item.Title}" belum selesai (${item.Percentage}%).`,
+                        icon: "warning",
+                        color: "text-red-500"
+                    });
                 }
-            })
-            .catch(err => showToast("Gagal menyimpan ke cloud.", "error"));
+            });
+
+            // 2. Cek ujian terdekat
+            const now = new Date();
+            appState.db.exams.forEach(exam => {
+                const diffMs = new Date(exam.Date) - now;
+                const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+                if (days > 0 && days <= 3) {
+                    alerts.push({
+                        text: `Ujian Mendatang: ${exam.Course} dalam ${days} hari lagi!`,
+                        icon: "notifications_active",
+                        color: "text-amber-500"
+                    });
+                }
+            });
+
+            // 3. Cek checklist belum selesai
+            const undoneChecklist = appState.db.checklist.filter(item => item.IsCompleted === false || item.IsCompleted === "false");
+            if (undoneChecklist.length > 0) {
+                alerts.push({
+                    text: `Agenda Harian: Ada ${undoneChecklist.length} tugas hari ini yang belum Anda selesaikan.`,
+                    icon: "checklist",
+                    color: "text-neutral-500"
+                });
+            }
+
+            if (alerts.length === 0) {
+                content.innerHTML = `
+                    <div class="text-center py-4 text-xs text-outline dark:text-neutral-400">
+                        <span class="material-symbols-outlined text-lg mb-1 block">done_all</span>
+                        Tidak ada pengingat mendesak saat ini.
+                    </div>
+                `;
+                if (pulse) pulse.classList.add('hidden');
+            } else {
+                if (pulse) pulse.classList.remove('hidden');
+                alerts.forEach(alert => {
+                    const row = document.createElement('div');
+                    row.className = "flex gap-2 items-start text-xs p-2 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg transition-colors";
+                    row.innerHTML = `
+                        <span class="material-symbols-outlined ${alert.color} text-sm shrink-0 mt-0.5">${alert.icon}</span>
+                        <p class="text-neutral-700 dark:text-neutral-300 font-semibold leading-relaxed">${alert.text}</p>
+                    `;
+                    content.appendChild(row);
+                });
+            }
         }
 
 
@@ -1472,6 +1764,7 @@
                 schedule: 'Course Schedule Planner',
                 notebook: 'Advanced Synthesis Notebook',
                 assignments: 'Assignments & Task Matrices',
+                exams: 'Jadwal Ujian & Countdown',
                 analytics: 'Statistics & Deep Insights'
             };
             document.getElementById('app-bar-title').innerText = titles[pageId] || 'Workspace Dashboard';
@@ -1491,10 +1784,10 @@
                     duration: 0.45,
                     ease: "power2.out",
                     onComplete: () => {
-                        if (pageId === 'analytics') {
+                        if (pageId === 'analytics' && reflectiveChartInstance && moodSpectrumChartInstance) {
                             reflectiveChartInstance.update();
                             moodSpectrumChartInstance.update();
-                        } else if (pageId === 'dashboard') {
+                        } else if (pageId === 'dashboard' && dashboardStudyChartInstance) {
                             dashboardStudyChartInstance.update();
                         }
                     }
@@ -1551,10 +1844,12 @@
                 appState.currentTheme = 'dark';
                 showToast('Dark Mode diaktifkan', 'dark_mode');
             }
-            updateChartThemes();
+            if (reflectiveChartInstance && dashboardStudyChartInstance) {
+                updateChartThemes();
+            }
         }
 
-        // Sidebar Collapse Trigger logic - MEMPERBAIKI BUG TUMPANG TINDIH ELEMEN (image_3ea91e.png)
+        // Sidebar Collapse Trigger logic
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const main = document.getElementById('main-content');
@@ -1646,7 +1941,7 @@
             progressCircle.style.strokeDashoffset = offset;
         }
 
-        // Live Realtime Clock Engine in Indonesian (Hari, Tanggal, dan Waktu Realtime)
+        // Live Realtime Clock Engine in Indonesian
         function runClockEngine() {
             const timeSpan = document.getElementById('live-time');
             const dateSpan = document.getElementById('live-date');
@@ -1665,14 +1960,15 @@
             const minutes = now.getMinutes().toString().padStart(2, '0');
             const seconds = now.getSeconds().toString().padStart(2, '0');
 
-            timeSpan.innerHTML = `${hours}:${minutes}:${seconds} WIB • SEMESTER GANJIL`;
-            dateSpan.textContent = `${dayName}, ${dateNum} ${monthName} ${year}`;
+            if (timeSpan) timeSpan.innerHTML = `${hours}:${minutes}:${seconds} WIB • SEMESTER GANJIL`;
+            if (dateSpan) dateSpan.textContent = `${dayName}, ${dateNum} ${monthName} ${year}`;
         }
 
         // Greeting dynamic set
         function setDynamicGreeting() {
             const hour = new Date().getHours();
             const greetEl = document.getElementById('dashboard-greeting');
+            if (!greetEl) return;
             let text = "Selamat datang kembali, Irwan";
 
             if (hour < 11) text = "Selamat pagi, Irwan";
@@ -1741,85 +2037,91 @@
         let moodSpectrumChartInstance;
 
         function initChartCore() {
-            const barCtx = document.getElementById('dashboardStudyChart').getContext('2d');
-            dashboardStudyChartInstance = new Chart(barCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['S', 'S', 'R', 'K', 'J', 'S', 'M'],
-                    datasets: [{
-                        label: 'Jam Belajar',
-                        data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: '#5d5f5f',
-                        borderRadius: 6,
-                        borderSkipped: false,
-                        barThickness: 16
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { display: false, grid: { display: false } },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
-
-            const lineCtx = document.getElementById('reflectiveStudyChart').getContext('2d');
-            reflectiveChartInstance = new Chart(lineCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
-                    datasets: [{
-                        data: [0, 0, 0, 0, 0, 0, 0],
-                        borderColor: '#5a614f',
-                        borderWidth: 3,
-                        tension: 0.4,
-                        fill: true,
-                        backgroundColor: 'rgba(90, 97, 79, 0.08)',
-                        pointBackgroundColor: '#5a614f',
-                        pointHoverRadius: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { grid: { color: 'rgba(236,236,236,0.5)' } },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
-
-            const donutCtx = document.getElementById('moodSpectrumChart').getContext('2d');
-            moodSpectrumChartInstance = new Chart(donutCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Tenang', 'Terinspirasi', 'Melamun'],
-                    datasets: [{
-                        data: [0, 0, 0],
-                        backgroundColor: ['#5e604f', '#dee5cf', '#444748'],
-                        borderWidth: 3,
-                        borderColor: '#fcf9f8'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                boxWidth: 12,
-                                font: { family: 'Hanken Grotesk', size: 11, weight: 'bold' }
-                            }
-                        }
+            const barCtx = document.getElementById('dashboardStudyChart');
+            if (barCtx) {
+                dashboardStudyChartInstance = new Chart(barCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['S', 'S', 'R', 'K', 'J', 'S', 'M'],
+                        datasets: [{
+                            label: 'Jam Belajar',
+                            data: [0, 0, 0, 0, 0, 0, 0],
+                            backgroundColor: '#5d5f5f',
+                            borderRadius: 6,
+                            borderSkipped: false,
+                            barThickness: 16
+                        }]
                     },
-                    cutout: '70%'
-                }
-            });
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false, grid: { display: false } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            const lineCtx = document.getElementById('reflectiveStudyChart');
+            if (lineCtx) {
+                reflectiveChartInstance = new Chart(lineCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                        datasets: [{
+                            data: [0, 0, 0, 0, 0, 0, 0],
+                            borderColor: '#5a614f',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            backgroundColor: 'rgba(90, 97, 79, 0.08)',
+                            pointBackgroundColor: '#5a614f',
+                            pointHoverRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: 'rgba(236,236,236,0.5)' } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            const donutCtx = document.getElementById('moodSpectrumChart');
+            if (donutCtx) {
+                moodSpectrumChartInstance = new Chart(donutCtx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Tenang', 'Terinspirasi', 'Melamun'],
+                        datasets: [{
+                            data: [0, 0, 0],
+                            backgroundColor: ['#5e604f', '#dee5cf', '#444748'],
+                            borderWidth: 3,
+                            borderColor: '#fcf9f8'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    boxWidth: 12,
+                                    font: { family: 'Hanken Grotesk', size: 11, weight: 'bold' }
+                                }
+                            }
+                        },
+                        cutout: '70%'
+                    }
+                });
+            }
         }
 
         // Toggle custom reflective dataset
@@ -1829,8 +2131,10 @@
                 '7D': [0, 0, 0, 0, 0, 0, 0],
                 '1M': [0, 0, 0, 0, 0, 0, 0]
             };
-            reflectiveChartInstance.data.datasets[0].data = dataSets[range] || dataSets['7D'];
-            reflectiveChartInstance.update();
+            if (reflectiveChartInstance) {
+                reflectiveChartInstance.data.datasets[0].data = dataSets[range] || dataSets['7D'];
+                reflectiveChartInstance.update();
+            }
         }
 
         // Sync colors ketika beralih tema
@@ -1839,14 +2143,48 @@
             const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(236,236,236,0.5)';
             const textColor = isDark ? '#f3f0f0' : '#1b1c1c';
 
-            reflectiveChartInstance.options.scales.y.grid.color = gridColor;
-            reflectiveChartInstance.options.scales.y.ticks.color = textColor;
-            reflectiveChartInstance.options.scales.x.ticks.color = textColor;
-            reflectiveChartInstance.update();
+            if (reflectiveChartInstance) {
+                reflectiveChartInstance.options.scales.y.grid.color = gridColor;
+                reflectiveChartInstance.options.scales.y.ticks.color = textColor;
+                reflectiveChartInstance.options.scales.x.ticks.color = textColor;
+                reflectiveChartInstance.update();
+            }
 
-            dashboardStudyChartInstance.options.scales.x.ticks.color = textColor;
-            dashboardStudyChartInstance.data.datasets[0].backgroundColor = isDark ? '#cbd5e1' : '#5d5f5f';
-            dashboardStudyChartInstance.update();
+            if (dashboardStudyChartInstance) {
+                dashboardStudyChartInstance.options.scales.x.ticks.color = textColor;
+                dashboardStudyChartInstance.data.datasets[0].backgroundColor = isDark ? '#cbd5e1' : '#5d5f5f';
+                dashboardStudyChartInstance.update();
+            }
+        }
+
+        // Helpers untuk Modal Note
+        function openQuickNoteModal() {
+            const modal = document.getElementById('quickNoteModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.add('opacity-100');
+                    modal.querySelector('.transform').classList.remove('scale-95');
+                }, 50);
+            }
+        }
+
+        function closeQuickNoteModal() {
+            const modal = document.getElementById('quickNoteModal');
+            if (modal) {
+                modal.querySelector('.transform').classList.add('scale-95');
+                modal.classList.remove('opacity-100');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        function closeAddCourseModal() {
+            const modal = document.getElementById('addCourseModal');
+            if (modal) {
+                modal.querySelector('.transform').classList.add('scale-95');
+                modal.classList.remove('opacity-100');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
         }
     </script>
 </body>
